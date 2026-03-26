@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/394621120935595534/137f5860853f4b4488b8a5231859a63b/artifacts
+end_time: 1774331233616
+entry_point_name: ''
+experiment_id: '394621120935595534'
+lifecycle_stage: active
+run_id: 137f5860853f4b4488b8a5231859a63b
+run_name: glamorous-shrimp-697
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774331228899
+status: 3
+tags: []
+user_id: root

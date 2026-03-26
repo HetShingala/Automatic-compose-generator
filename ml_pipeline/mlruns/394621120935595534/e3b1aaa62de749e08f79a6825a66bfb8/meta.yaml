@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/394621120935595534/e3b1aaa62de749e08f79a6825a66bfb8/artifacts
+end_time: 1774333926525
+entry_point_name: ''
+experiment_id: '394621120935595534'
+lifecycle_stage: active
+run_id: e3b1aaa62de749e08f79a6825a66bfb8
+run_name: casual-wasp-69
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774333926445
+status: 3
+tags: []
+user_id: root

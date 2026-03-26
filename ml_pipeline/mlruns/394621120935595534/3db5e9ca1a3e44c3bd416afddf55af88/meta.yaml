@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/394621120935595534/3db5e9ca1a3e44c3bd416afddf55af88/artifacts
+end_time: 1774333616775
+entry_point_name: ''
+experiment_id: '394621120935595534'
+lifecycle_stage: active
+run_id: 3db5e9ca1a3e44c3bd416afddf55af88
+run_name: victorious-horse-370
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774333616700
+status: 3
+tags: []
+user_id: root

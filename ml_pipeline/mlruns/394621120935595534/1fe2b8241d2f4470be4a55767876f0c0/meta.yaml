@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/394621120935595534/1fe2b8241d2f4470be4a55767876f0c0/artifacts
+end_time: 1774333612202
+entry_point_name: ''
+experiment_id: '394621120935595534'
+lifecycle_stage: active
+run_id: 1fe2b8241d2f4470be4a55767876f0c0
+run_name: exultant-dove-456
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774333606720
+status: 3
+tags: []
+user_id: root

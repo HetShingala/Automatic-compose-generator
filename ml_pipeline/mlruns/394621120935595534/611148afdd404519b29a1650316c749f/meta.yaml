@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/394621120935595534/611148afdd404519b29a1650316c749f/artifacts
+end_time: 1774331237140
+entry_point_name: ''
+experiment_id: '394621120935595534'
+lifecycle_stage: active
+run_id: 611148afdd404519b29a1650316c749f
+run_name: enchanting-stork-834
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774331237055
+status: 3
+tags: []
+user_id: root

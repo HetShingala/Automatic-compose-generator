@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/394621120935595534/de24190cbc1e4e20acf6705123213daf/artifacts
+end_time: 1774330931735
+entry_point_name: ''
+experiment_id: '394621120935595534'
+lifecycle_stage: active
+run_id: de24190cbc1e4e20acf6705123213daf
+run_name: wise-pig-927
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774330927543
+status: 3
+tags: []
+user_id: root

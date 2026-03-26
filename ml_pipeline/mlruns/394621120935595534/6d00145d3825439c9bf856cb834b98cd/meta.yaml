@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/394621120935595534/6d00145d3825439c9bf856cb834b98cd/artifacts
+end_time: 1774333892409
+entry_point_name: ''
+experiment_id: '394621120935595534'
+lifecycle_stage: active
+run_id: 6d00145d3825439c9bf856cb834b98cd
+run_name: rambunctious-ram-18
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774333887846
+status: 3
+tags: []
+user_id: root

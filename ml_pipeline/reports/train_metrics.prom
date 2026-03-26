@@ -1,0 +1,55 @@
+# HELP python_gc_objects_collected_total Objects collected during gc
+# TYPE python_gc_objects_collected_total counter
+python_gc_objects_collected_total{generation="0"} 4865.0
+python_gc_objects_collected_total{generation="1"} 1193.0
+python_gc_objects_collected_total{generation="2"} 84.0
+# HELP python_gc_objects_uncollectable_total Uncollectable objects found during GC
+# TYPE python_gc_objects_uncollectable_total counter
+python_gc_objects_uncollectable_total{generation="0"} 0.0
+python_gc_objects_uncollectable_total{generation="1"} 0.0
+python_gc_objects_uncollectable_total{generation="2"} 0.0
+# HELP python_gc_collections_total Number of times this generation was collected
+# TYPE python_gc_collections_total counter
+python_gc_collections_total{generation="0"} 553.0
+python_gc_collections_total{generation="1"} 50.0
+python_gc_collections_total{generation="2"} 4.0
+# HELP python_info Python platform information
+# TYPE python_info gauge
+python_info{implementation="CPython",major="3",minor="11",patchlevel="15",version="3.11.15"} 1.0
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 1.090306048e+09
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 2.59915776e+08
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1.77443880435e+09
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 4.96
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 8.0
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 1.048576e+06
+# HELP training_duration_seconds Time taken to train the model
+# TYPE training_duration_seconds summary
+training_duration_seconds_count 1.0
+training_duration_seconds_sum 0.09699821472167969
+# HELP training_duration_seconds_created Time taken to train the model
+# TYPE training_duration_seconds_created gauge
+training_duration_seconds_created 1.77443880866484e+09
+# HELP train_samples_total Number of training samples
+# TYPE train_samples_total gauge
+train_samples_total 240.0
+# HELP test_samples_total Number of test samples
+# TYPE test_samples_total gauge
+test_samples_total 60.0
+# HELP training_completed_total Number of times training completed successfully
+# TYPE training_completed_total counter
+training_completed_total 1.0
+# HELP training_completed_created Number of times training completed successfully
+# TYPE training_completed_created gauge
+training_completed_created 1.774438808664902e+09

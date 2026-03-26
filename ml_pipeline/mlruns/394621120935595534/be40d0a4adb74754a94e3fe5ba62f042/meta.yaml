@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/394621120935595534/be40d0a4adb74754a94e3fe5ba62f042/artifacts
+end_time: 1774333557724
+entry_point_name: ''
+experiment_id: '394621120935595534'
+lifecycle_stage: active
+run_id: be40d0a4adb74754a94e3fe5ba62f042
+run_name: mercurial-shrew-439
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774333557631
+status: 3
+tags: []
+user_id: root

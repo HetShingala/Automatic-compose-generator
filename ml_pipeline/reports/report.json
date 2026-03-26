@@ -1,0 +1,5 @@
+{
+  "accuracy": 0.9166666666666666,
+  "precision_macro": 0.9545,
+  "n_test_samples": 60
+}

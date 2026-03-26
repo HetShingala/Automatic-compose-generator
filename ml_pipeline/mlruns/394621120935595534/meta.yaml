@@ -1,0 +1,7 @@
+artifact_location: mlflow-artifacts:/394621120935595534
+creation_time: 1774330049215
+experiment_id: '394621120935595534'
+last_update_time: 1774330049215
+lifecycle_stage: active
+name: ml-pipeline
+workspace: default

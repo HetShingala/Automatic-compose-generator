@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MLOps Control Panel</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:      #07090f;
+      --surface: #0c0f1a;
+      --card:    #0f1220;
+      --border:  #1a2035;
+      --border2: #212840;
+      --accent:  #38bdf8;
+      --indigo:  #818cf8;
+      --green:   #34d399;
+      --orange:  #fb923c;
+      --red:     #f87171;
+      --yellow:  #fbbf24;
+      --text:    #e2e8f0;
+      --muted:   #4b5675;
+      --mono:    'JetBrains Mono', monospace;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:2rem 1rem;
+      background-image:radial-gradient(ellipse 70% 40% at 50% -10%,rgba(56,189,248,.06) 0%,transparent 60%),
+        radial-gradient(ellipse 50% 30% at 90% 90%,rgba(129,140,248,.04) 0%,transparent 50%);}
+    .shell{max-width:1000px;margin:0 auto;}
+
+    /* Header */
+    .hdr{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border);}
+    .hdr-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--accent),var(--indigo));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0;}
+    .hdr h1{font-size:1.25rem;font-weight:800;color:#fff;letter-spacing:-.02em;}
+    .hdr p{font-size:.72rem;color:var(--muted);font-family:var(--mono);margin-top:2px;}
+    .chips{margin-left:auto;display:flex;gap:.4rem;flex-wrap:wrap;}
+    .chip{font-family:var(--mono);font-size:.6rem;font-weight:700;padding:.15rem .45rem;border-radius:3px;border:1px solid;letter-spacing:.06em;}
+    .chip-b{color:var(--accent); border-color:rgba(56,189,248,.25); background:rgba(56,189,248,.06);}
+    .chip-g{color:var(--green);  border-color:rgba(52,211,153,.25);  background:rgba(52,211,153,.06);}
+    .chip-i{color:var(--indigo); border-color:rgba(129,140,248,.25); background:rgba(129,140,248,.06);}
+
+    /* Tabs */
+    .tabs{display:flex;border:1px solid var(--border);border-radius:9px;overflow:hidden;background:var(--surface);margin-bottom:1.75rem;}
+    .tab{flex:1;padding:.65rem .5rem;font-family:var(--mono);font-size:.7rem;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:transparent;border-right:1px solid var(--border);transition:all .2s;letter-spacing:.03em;}
+    .tab:last-child{border-right:none;}
+    .tab:hover{color:var(--text);background:rgba(255,255,255,.02);}
+    .tab.active{color:#fff;background:linear-gradient(135deg,rgba(56,189,248,.12),rgba(129,140,248,.12));border-bottom:2px solid var(--accent);}
+
+    .panel{display:none;} .panel.active{display:block;}
+
+    /* Card */
+    .card{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:1.75rem;margin-bottom:1.25rem;}
+    .card-hdr{display:flex;align-items:center;gap:.7rem;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border);}
+    .card-ico{width:32px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
+    .ico-b{background:rgba(56,189,248,.1);} .ico-i{background:rgba(129,140,248,.1);} .ico-g{background:rgba(52,211,153,.1);} .ico-o{background:rgba(251,146,60,.1);}
+    .card-title{font-size:.9rem;font-weight:700;color:#fff;}
+    .card-sub{font-size:.7rem;color:var(--muted);font-family:var(--mono);margin-top:1px;}
+
+    /* Form */
+    label{display:block;font-size:.68rem;font-weight:700;color:var(--muted);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.08em;font-family:var(--mono);}
+    input,textarea,select{width:100%;background:var(--surface);border:1px solid var(--border2);border-radius:7px;color:var(--text);padding:.55rem .8rem;font-size:.85rem;margin-bottom:1.1rem;font-family:var(--mono);transition:border-color .2s,box-shadow .2s;}
+    input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(56,189,248,.07);}
+    textarea{resize:vertical;min-height:75px;}
+    .hint{font-size:.68rem;color:var(--muted);margin-top:-.9rem;margin-bottom:1.1rem;font-family:var(--mono);}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+    .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;}
+    hr{border:none;border-top:1px solid var(--border);margin:1.25rem 0;}
+
+    /* Stack selector */
+    .stack-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;margin-bottom:1.1rem;}
+    .stack-btn{padding:.5rem .4rem;background:var(--surface);border:1px solid var(--border2);border-radius:7px;color:var(--muted);font-family:var(--mono);font-size:.68rem;font-weight:600;cursor:pointer;text-align:center;transition:all .2s;line-height:1.4;}
+    .stack-btn:hover{border-color:var(--accent);color:var(--text);}
+    .stack-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(56,189,248,.08);}
+    .stack-btn .stack-icon{font-size:1.1rem;display:block;margin-bottom:.2rem;}
+
+    /* Preview box */
+    .preview{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:.75rem 1rem;font-family:var(--mono);font-size:.72rem;line-height:1.7;margin-bottom:1.1rem;color:var(--muted);display:none;}
+    .preview.show{display:block;}
+    .preview-line{color:var(--text);}
+    .preview-comment{color:var(--muted);}
+    .preview-cmd{color:var(--accent);}
+    .preview-val{color:var(--green);}
+
+    /* Buttons */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;border:none;border-radius:7px;padding:.65rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Syne',sans-serif;width:100%;}
+    .btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important;}
+    .btn-blue  {background:linear-gradient(135deg,var(--accent),var(--indigo));color:#fff;}
+    .btn-blue:hover:not(:disabled){opacity:.88;transform:translateY(-1px);box-shadow:0 4px 18px rgba(56,189,248,.2);}
+    .btn-green {background:linear-gradient(135deg,#059669,var(--green));color:#fff;}
+    .btn-green:hover:not(:disabled){opacity:.88;transform:translateY(-1px);box-shadow:0 4px 18px rgba(52,211,153,.2);}
+    .btn-orange{background:linear-gradient(135deg,#ea580c,var(--orange));color:#fff;}
+    .btn-orange:hover:not(:disabled){opacity:.88;transform:translateY(-1px);box-shadow:0 4px 18px rgba(251,146,60,.2);}
+    .btn-ghost{background:var(--surface);color:var(--text);border:1px solid var(--border2);width:auto;padding:.45rem .9rem;font-size:.75rem;}
+    .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+
+    /* Result */
+    .result{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:.9rem 1rem;font-family:var(--mono);font-size:.75rem;line-height:1.75;margin-top:1rem;display:none;}
+    .result.show{display:block;}
+    .r-ok{color:var(--green);} .r-err{color:var(--red);} .r-warn{color:var(--orange);} .r-info{color:var(--accent);} .r-dim{color:var(--muted);}
+    .r-row{display:flex;align-items:flex-start;gap:.45rem;margin-bottom:.2rem;}
+
+    /* Severity pill */
+    .sev{display:inline-block;font-family:var(--mono);font-size:.58rem;font-weight:700;padding:.12rem .4rem;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;flex-shrink:0;}
+    .sev-critical{background:rgba(248,113,113,.18);color:var(--red);   border:1px solid rgba(248,113,113,.3);}
+    .sev-high    {background:rgba(251,146,60,.18); color:var(--orange);border:1px solid rgba(251,146,60,.3);}
+    .sev-medium  {background:rgba(251,191,36,.15); color:var(--yellow);border:1px solid rgba(251,191,36,.3);}
+    .sev-low     {background:rgba(52,211,153,.15); color:var(--green); border:1px solid rgba(52,211,153,.3);}
+    .sev-error   {background:rgba(248,113,113,.18);color:var(--red);   border:1px solid rgba(248,113,113,.3);}
+    .sev-warning {background:rgba(251,146,60,.18); color:var(--orange);border:1px solid rgba(251,146,60,.3);}
+    .sev-info    {background:rgba(56,189,248,.15); color:var(--accent);border:1px solid rgba(56,189,248,.3);}
+
+    /* Scan bar */
+    .scan-bar{display:none;gap:.6rem;margin-top:.9rem;}
+    .scan-bar.show{display:flex;}
+    .scan-cnt{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:.65rem;text-align:center;}
+    .scan-cnt .n{font-size:1.3rem;font-weight:800;font-family:var(--mono);line-height:1;}
+    .scan-cnt .l{font-size:.6rem;color:var(--muted);font-family:var(--mono);margin-top:.2rem;text-transform:uppercase;letter-spacing:.05em;}
+
+    /* OPS */
+    .pipeline{display:flex;align-items:center;margin:1.5rem 0;overflow-x:auto;padding-bottom:.4rem;}
+    .st{display:flex;flex-direction:column;align-items:center;gap:.35rem;min-width:72px;}
+    .st-c{width:34px;height:34px;border-radius:50%;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:.8rem;background:var(--surface);transition:all .3s;}
+    .st-c.done  {border-color:var(--green); background:rgba(52,211,153,.1);}
+    .st-c.active{border-color:var(--accent);background:rgba(56,189,248,.1);}
+    .st-c.error {border-color:var(--red);   background:rgba(248,113,113,.1);}
+    .st-c.skip  {border-color:var(--muted); background:rgba(75,86,117,.1);}
+    .st-l{font-family:var(--mono);font-size:.6rem;color:var(--muted);text-align:center;white-space:nowrap;}
+    .conn{flex:1;height:2px;background:var(--border);min-width:16px;margin-bottom:18px;transition:background .3s;}
+    .conn.done{background:var(--green);}
+
+    .ops-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.25rem;}
+    .ops-svc{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;}
+    .ops-svc-title{font-size:.78rem;font-weight:700;color:#fff;margin-bottom:.2rem;}
+    .ops-svc-desc{font-size:.68rem;color:var(--muted);font-family:var(--mono);line-height:1.5;}
+    .ops-svc-status{display:flex;align-items:center;gap:.35rem;margin-top:.6rem;font-family:var(--mono);font-size:.68rem;}
+    .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+    .dot-idle{background:var(--muted);}
+    .dot-run {background:var(--accent);animation:pulse 1s ease-in-out infinite;}
+    .dot-ok  {background:var(--green);}
+    .dot-warn{background:var(--orange);}
+    .dot-err {background:var(--red);}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+    .tgl-row{display:flex;align-items:center;justify-content:space-between;padding:.65rem 0;border-bottom:1px solid var(--border);}
+    .tgl-row:last-child{border-bottom:none;}
+    .tgl-info .tgl-title{font-size:.82rem;font-weight:600;color:var(--text);}
+    .tgl-info .tgl-desc{font-size:.68rem;color:var(--muted);font-family:var(--mono);margin-top:1px;}
+    .tgl{position:relative;width:34px;height:19px;flex-shrink:0;margin-left:1rem;}
+    .tgl input{opacity:0;width:0;height:0;}
+    .tgl-sl{position:absolute;inset:0;background:var(--border2);border-radius:20px;cursor:pointer;transition:.2s;}
+    .tgl-sl:before{content:'';position:absolute;width:13px;height:13px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;}
+    .tgl input:checked+.tgl-sl{background:var(--accent);}
+    .tgl input:checked+.tgl-sl:before{transform:translateX(15px);}
+
+    .term{background:#04060d;border:1px solid var(--border);border-radius:7px;padding:.9rem 1rem;font-family:var(--mono);font-size:.72rem;line-height:1.8;min-height:110px;max-height:240px;overflow-y:auto;margin-top:1rem;display:none;}
+    .term.show{display:block;}
+    .term::-webkit-scrollbar{width:3px;}
+    .term::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+    .t-ts{color:#1f2937;margin-right:.4rem;} .t-ok{color:var(--green);} .t-err{color:var(--red);} .t-inf{color:var(--accent);} .t-wrn{color:var(--orange);}
+
+    .spin{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    @media(max-width:600px){
+      .row2,.row3{grid-template-columns:1fr;}
+      .ops-grid{grid-template-columns:1fr;}
+      .chips{display:none;}
+      .stack-grid{grid-template-columns:repeat(3,1fr);}
+    }
+  </style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="hdr">
+    <div class="hdr-icon">🐳</div>
+    <div>
+      <h1>MLOps Control Panel</h1>
+      <p>compose_generator · v2.1.0 · localhost:5050</p>
+    </div>
+    <div class="chips">
+      <span class="chip chip-b">DOCKER</span>
+      <span class="chip chip-g">MLFLOW</span>
+      <span class="chip chip-i">PROMETHEUS</span>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('generator')">⚙ Generator</button>
+    <button class="tab"        onclick="switchTab('linting')"  >🔍 Linting</button>
+    <button class="tab"        onclick="switchTab('scanning')" >🛡 Scanning</button>
+    <button class="tab"        onclick="switchTab('ops')"      >🚀 One-Click OPS</button>
+  </div>
+
+  <!-- ═══════════════════════ TAB 1 — GENERATOR ═══════════════════════ -->
+  <div class="panel active" id="panel-generator">
+    <div class="card">
+      <div class="card-hdr">
+        <div class="card-ico ico-b">⚙️</div>
+        <div>
+          <div class="card-title">Docker Compose Generator</div>
+          <div class="card-sub">Supports Python · Node.js · PHP/Laravel · Ruby · Go</div>
+        </div>
+      </div>
+
+      <form action="/generate" method="POST" id="gen-form">
+
+        <!-- Stack selector -->
+        <label>Project Stack</label>
+        <div class="stack-grid">
+          <button type="button" class="stack-btn active" data-stack="python"  onclick="selectStack('python')">
+            <span class="stack-icon">🐍</span>Python
+          </button>
+          <button type="button" class="stack-btn" data-stack="node" onclick="selectStack('node')">
+            <span class="stack-icon">🟢</span>Node.js
+          </button>
+          <button type="button" class="stack-btn" data-stack="php" onclick="selectStack('php')">
+            <span class="stack-icon">🐘</span>PHP/Laravel
+          </button>
+          <button type="button" class="stack-btn" data-stack="ruby" onclick="selectStack('ruby')">
+            <span class="stack-icon">💎</span>Ruby
+          </button>
+          <button type="button" class="stack-btn" data-stack="go" onclick="selectStack('go')">
+            <span class="stack-icon">🔵</span>Go
+          </button>
+        </div>
+        <input type="hidden" name="stack" id="stack-input" value="python"/>
+
+        <!-- Dockerfile preview -->
+        <label>Generated Install Commands <span style="color:var(--muted);text-transform:none;letter-spacing:0;font-size:.68rem;">(auto-updates with stack)</span></label>
+        <div class="preview show" id="install-preview"></div>
+
+        <div class="row2">
+          <div>
+            <label>Service Name</label>
+            <input type="text" name="service_name" placeholder="ml-pipeline" value="ml-pipeline"/>
+          </div>
+          <div>
+            <label>Port</label>
+            <input type="text" name="port" id="port-input" placeholder="8080" value="8080"/>
+          </div>
+        </div>
+
+        <label>Base Image</label>
+        <input type="text" name="image_base" id="image-input" placeholder="python:3.11-slim" value="python:3.11-slim"/>
+
+        <hr/>
+
+        <label>Environment Variables</label>
+        <textarea name="env_vars" placeholder="MODEL_PATH=/app/models/model.pkl&#10;LOG_LEVEL=INFO"></textarea>
+        <p class="hint">One KEY=VALUE per line · leave blank if none</p>
+
+        <label>Volume Mounts</label>
+        <textarea name="volumes" placeholder="./models:/app/models&#10;./reports:/app/reports"></textarea>
+        <p class="hint">One host:container per line · leave blank if none</p>
+
+        <hr/>
+        <button type="submit" class="btn btn-blue">⬇ Generate &amp; Download</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ TAB 2 — LINTING ═══════════════════════ -->
+  <div class="panel" id="panel-linting">
+    <div class="card">
+      <div class="card-hdr">
+        <div class="card-ico ico-i">🔍</div>
+        <div>
+          <div class="card-title">Code Linting &amp; Static Analysis</div>
+          <div class="card-sub">Real analysis via ast + pyflakes + ML-specific checks</div>
+        </div>
+      </div>
+      <label>Filename</label>
+      <input type="text" id="lint-filename" placeholder="train.py" value="train.py"/>
+      <label>Python Code</label>
+      <textarea id="lint-code" style="min-height:160px;font-size:.78rem;" placeholder="# Paste your Python file here..."></textarea>
+      <div style="display:flex;gap:.6rem;margin-bottom:1.1rem;">
+        <button class="btn btn-ghost" onclick="loadSample()">Load Sample</button>
+        <button class="btn btn-ghost" onclick="clearLint()">Clear</button>
+      </div>
+      <button class="btn btn-blue" id="lint-btn" onclick="runLint()">🔍 Run Linting</button>
+      <div class="result" id="lint-result"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ TAB 3 — SCANNING ═══════════════════════ -->
+  <div class="panel" id="panel-scanning">
+    <div class="card">
+      <div class="card-hdr">
+        <div class="card-ico ico-o">🛡️</div>
+        <div>
+          <div class="card-title">Image Vulnerability Scanning</div>
+          <div class="card-sub">Powered by Trivy · falls back to simulated scan if not installed</div>
+        </div>
+      </div>
+      <label>Docker Image</label>
+      <input type="text" id="scan-image" placeholder="python:3.11-slim" value="python:3.11-slim"/>
+      <label>Severity Filter</label>
+      <select id="scan-severity" style="margin-bottom:1.1rem;">
+        <option value="CRITICAL">Critical only</option>
+        <option value="CRITICAL,HIGH">Critical + High</option>
+        <option value="CRITICAL,HIGH,MEDIUM" selected>Critical + High + Medium</option>
+        <option value="CRITICAL,HIGH,MEDIUM,LOW">All severities</option>
+      </select>
+      <button class="btn btn-orange" id="scan-btn" onclick="runScan()">🛡 Scan Image</button>
+      <div class="scan-bar" id="scan-bar">
+        <div class="scan-cnt"><div class="n r-err"  id="cnt-c">0</div><div class="l">Critical</div></div>
+        <div class="scan-cnt"><div class="n r-warn" id="cnt-h">0</div><div class="l">High</div></div>
+        <div class="scan-cnt"><div class="n" style="color:var(--yellow)" id="cnt-m">0</div><div class="l">Medium</div></div>
+        <div class="scan-cnt"><div class="n r-ok"   id="cnt-l">0</div><div class="l">Low</div></div>
+      </div>
+      <div class="result" id="scan-result"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════ TAB 4 — OPS ═══════════════════════ -->
+  <div class="panel" id="panel-ops">
+    <div class="card">
+      <div class="card-hdr">
+        <div class="card-ico ico-g">🚀</div>
+        <div>
+          <div class="card-title">One-Click OPS</div>
+          <div class="card-sub">generate → lint → scan → build → deploy → monitor</div>
+        </div>
+      </div>
+
+      <div class="pipeline">
+        <div class="st"><div class="st-c" id="sc-gen">⚙️</div><div class="st-l">Generate</div></div>
+        <div class="conn" id="cn-1"></div>
+        <div class="st"><div class="st-c" id="sc-lint">🔍</div><div class="st-l">Lint</div></div>
+        <div class="conn" id="cn-2"></div>
+        <div class="st"><div class="st-c" id="sc-scan">🛡️</div><div class="st-l">Scan</div></div>
+        <div class="conn" id="cn-3"></div>
+        <div class="st"><div class="st-c" id="sc-build">🔨</div><div class="st-l">Build</div></div>
+        <div class="conn" id="cn-4"></div>
+        <div class="st"><div class="st-c" id="sc-deploy">🚀</div><div class="st-l">Deploy</div></div>
+        <div class="conn" id="cn-5"></div>
+        <div class="st"><div class="st-c" id="sc-monitor">📊</div><div class="st-l">Monitor</div></div>
+      </div>
+
+      <div class="ops-grid">
+        <div class="ops-svc">
+          <div class="ops-svc-title">🐳 Docker Compose</div>
+          <div class="ops-svc-desc">Generates Dockerfile + compose for selected stack</div>
+          <div class="ops-svc-status"><div class="dot dot-idle" id="d-docker"></div><span id="l-docker" class="r-dim">idle</span></div>
+        </div>
+        <div class="ops-svc">
+          <div class="ops-svc-title">🔍 Code Linter</div>
+          <div class="ops-svc-desc">ast + pyflakes + ML checks (Python only)</div>
+          <div class="ops-svc-status"><div class="dot dot-idle" id="d-lint"></div><span id="l-lint" class="r-dim">idle</span></div>
+        </div>
+        <div class="ops-svc">
+          <div class="ops-svc-title">🛡️ Vulnerability Scanner</div>
+          <div class="ops-svc-desc">Trivy CVE scan on base image</div>
+          <div class="ops-svc-status"><div class="dot dot-idle" id="d-scan"></div><span id="l-scan" class="r-dim">idle</span></div>
+        </div>
+        <div class="ops-svc">
+          <div class="ops-svc-title">📊 Observability Stack</div>
+          <div class="ops-svc-desc">MLflow + Prometheus + Grafana</div>
+          <div class="ops-svc-status"><div class="dot dot-idle" id="d-obs"></div><span id="l-obs" class="r-dim">idle</span></div>
+        </div>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:.4rem 1rem;margin-bottom:1.25rem;">
+        <div class="tgl-row">
+          <div class="tgl-info"><div class="tgl-title">Stop on lint errors</div><div class="tgl-desc">Abort if linting finds errors (Python only)</div></div>
+          <label class="tgl"><input type="checkbox" id="ops-lint" checked><div class="tgl-sl"></div></label>
+        </div>
+        <div class="tgl-row">
+          <div class="tgl-info"><div class="tgl-title">Stop on critical CVEs</div><div class="tgl-desc">Abort if scanner finds critical vulnerabilities</div></div>
+          <label class="tgl"><input type="checkbox" id="ops-scan" checked><div class="tgl-sl"></div></label>
+        </div>
+        <div class="tgl-row">
+          <div class="tgl-info"><div class="tgl-title">Use linting tab code</div><div class="tgl-desc">Send code pasted in the Linting tab</div></div>
+          <label class="tgl"><input type="checkbox" id="ops-use-code" checked><div class="tgl-sl"></div></label>
+        </div>
+      </div>
+
+      <button class="btn btn-green" id="ops-btn" onclick="runOPS()">🚀 Run Full Pipeline</button>
+      <div class="term" id="ops-term"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const ts  = () => new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+
+// ── Tab switching ──────────────────────────────────────────
+function switchTab(name) {
+  ['generator','linting','scanning','ops'].forEach((n,i) => {
+    document.querySelectorAll('.tab')[i].classList.toggle('active', n === name);
+    $('panel-'+n).classList.toggle('active', n === name);
+  });
+}
+
+// ── Stack configs (mirrors STACK_CONFIGS in composer.py) ───
+const STACKS = {
+  python: { copy: 'COPY requirements.txt .', install: 'RUN pip install --no-cache-dir -r requirements.txt', image: 'python:3.11-slim', port: '8080' },
+  node:   { copy: 'COPY package*.json .',     install: 'RUN npm install --production',                       image: 'node:20-slim',      port: '3000' },
+  php:    { copy: 'COPY composer.json composer.lock .', install: 'RUN composer install --no-dev --optimize-autoloader', image: 'php:8.2-fpm', port: '9000' },
+  ruby:   { copy: 'COPY Gemfile Gemfile.lock .', install: 'RUN bundle install --without development test',   image: 'ruby:3.2-slim',     port: '3000' },
+  go:     { copy: 'COPY go.mod go.sum .',     install: 'RUN go mod download',                                image: 'golang:1.21-alpine',port: '8080' },
+};
+
+function selectStack(stack) {
+  // Update active button
+  document.querySelectorAll('.stack-btn').forEach(b => b.classList.toggle('active', b.dataset.stack === stack));
+  $('stack-input').value = stack;
+
+  const cfg = STACKS[stack];
+
+  // Auto-fill image and port
+  $('image-input').value = cfg.image;
+  $('port-input').value  = cfg.port;
+
+  // Also update scan image to match
+  $('scan-image').value  = cfg.image;
+
+  // Update preview
+  const preview = $('install-preview');
+  preview.innerHTML = `
+    <span class="preview-comment"># dependency copy (cached layer)</span><br>
+    <span class="preview-line">${esc(cfg.copy)}</span><br>
+    <span class="preview-comment"># install dependencies</span><br>
+    <span class="preview-line">${esc(cfg.install)}</span>
+  `;
+  preview.className = 'preview show';
+}
+
+// Init preview on load
+selectStack('python');
+
+// ── LINTING ───────────────────────────────────────────────
+const SAMPLE = `import os, json
+import pickle
+import numpy as np
+import pandas as pd
+
+PASSWORD = "hardcoded_secret_123"
+
+def train(X_train, y_train):
+    from sklearn.ensemble import RandomForestClassifier
+    clf = RandomForestClassifier(n_estimators=50)
+    clf.fit(X_train, y_train)
+    return clf
+
+if __name__ == "__main__":
+    from sklearn.model_selection import train_test_split
+    df = pd.read_csv("data/dataset.csv")
+    X  = df.drop(columns=["target"])
+    y  = df["target"]
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+    model    = train(X_train, y_train)
+    accuracy = (model.predict(X_test) == y_test.values)
+    print(f"Accuracy: {accuracy}")
+`;
+
+function loadSample() { $('lint-code').value = SAMPLE; $('lint-filename').value = 'train.py'; }
+function clearLint()  { $('lint-code').value = ''; const r=$('lint-result'); r.className='result'; r.innerHTML=''; }
+
+async function runLint() {
+  const code = $('lint-code').value.trim();
+  const filename = $('lint-filename').value.trim() || 'script.py';
+  const btn = $('lint-btn'), result = $('lint-result');
+  if (!code) { result.className='result show'; result.innerHTML='<span class="r-warn">⚠ Paste some code first.</span>'; return; }
+  btn.disabled=true; btn.innerHTML='<span class="spin"></span> &nbsp;Analysing...';
+  result.className='result show'; result.innerHTML='<span class="r-info">Running checks...</span>';
+  try {
+    const res  = await fetch('/lint',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code,filename})});
+    const data = await res.json();
+    if (data.error) { result.innerHTML=`<span class="r-err">✖ ${esc(data.error)}</span>`; return; }
+    const {issues, summary} = data;
+    if (issues.length === 0) {
+      result.innerHTML=`<div class="r-row"><span class="r-ok">✔</span><span class="r-ok">No issues found in ${esc(filename)}</span></div><div class="r-row r-dim">All checks passed.</div>`;
+      return;
+    }
+    let html=`<div class="r-row r-dim">${esc(filename)} — ${summary.total} issue(s): ${summary.errors} errors · ${summary.warnings} warnings</div><br>`;
+    issues.forEach(i => {
+      html+=`<div class="r-row" style="margin-bottom:.4rem;align-items:flex-start;">
+        <span class="sev sev-${esc(i.severity)}">${esc(i.severity)}</span>
+        <span><span class="r-dim">line ${i.line} —</span> ${esc(i.message)}</span>
+      </div>`;
+    });
+    result.innerHTML = html;
+  } catch(e) { result.innerHTML=`<span class="r-err">✖ ${esc(e.message)}</span>`; }
+  finally { btn.disabled=false; btn.innerHTML='🔍 Run Linting'; }
+}
+
+// ── SCANNING ──────────────────────────────────────────────
+async function runScan() {
+  const image=$('scan-image').value.trim(), severity=$('scan-severity').value;
+  const btn=$('scan-btn'), result=$('scan-result'), bar=$('scan-bar');
+  if (!image) { result.className='result show'; result.innerHTML='<span class="r-warn">⚠ Enter an image name.</span>'; return; }
+  btn.disabled=true; btn.innerHTML='<span class="spin"></span> &nbsp;Scanning...';
+  result.className='result show'; bar.className='scan-bar';
+  result.innerHTML=`<span class="r-info">Scanning ${esc(image)}...</span>`;
+  try {
+    const res  = await fetch('/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image,severity})});
+    const data = await res.json();
+    if (data.error) { result.innerHTML=`<span class="r-err">✖ ${esc(data.error)}</span>`; return; }
+    const {vulnerabilities, summary, scanner} = data;
+    $('cnt-c').textContent=summary.CRITICAL||0; $('cnt-h').textContent=summary.HIGH||0;
+    $('cnt-m').textContent=summary.MEDIUM||0;   $('cnt-l').textContent=summary.LOW||0;
+    bar.className='scan-bar show';
+    if (vulnerabilities.length===0) {
+      result.innerHTML=`<div class="r-row"><span class="r-ok">✔</span><span class="r-ok">No vulnerabilities found in ${esc(image)}</span></div><div class="r-row r-dim">Scanner: ${esc(scanner)}</div>`;
+      return;
+    }
+    const order={CRITICAL:0,HIGH:1,MEDIUM:2,LOW:3};
+    vulnerabilities.sort((a,b)=>(order[a.severity]||9)-(order[b.severity]||9));
+    let html=`<div class="r-row r-dim">${vulnerabilities.length} vuln(s) · scanner: ${esc(scanner)}</div><br>`;
+    vulnerabilities.forEach(v => {
+      html+=`<div class="r-row" style="margin-bottom:.55rem;align-items:flex-start;">
+        <span class="sev sev-${v.severity.toLowerCase()}">${esc(v.severity)}</span>
+        <span style="margin-left:.4rem;">
+          <span style="color:#fff;font-weight:600;">${esc(v.id)}</span>
+          <span class="r-dim"> · ${esc(v.package)} ${esc(v.version)}</span><br>
+          <span style="color:var(--muted);font-size:.7rem;">${esc(v.description)}</span><br>
+          <span style="color:var(--muted);font-size:.68rem;">Fixed in: ${esc(v.fixed_in)}</span>
+        </span>
+      </div>`;
+    });
+    if ((summary.CRITICAL||0)>0) html+=`<br><div class="r-row"><span class="r-err">⚠</span><span class="r-err"> ${summary.CRITICAL} critical CVE(s) — consider a newer base image</span></div>`;
+    result.innerHTML=html;
+  } catch(e) { result.innerHTML=`<span class="r-err">✖ ${esc(e.message)}</span>`; }
+  finally { btn.disabled=false; btn.innerHTML='🛡 Scan Image'; }
+}
+
+// ── ONE-CLICK OPS ─────────────────────────────────────────
+function setSt(id,s){ $(id).className='st-c '+s; }
+function setCn(id)  { $(id).classList.add('done'); }
+function setSvc(n,d,msg,mc){ $('d-'+n).className='dot '+d; const l=$('l-'+n); l.textContent=msg; l.className=mc; }
+function termLog(cls,msg){ const t=$('ops-term'); t.innerHTML+=`<div><span class="t-ts">[${ts()}]</span><span class="${cls}">${esc(msg)}</span></div>`; t.scrollTop=t.scrollHeight; }
+
+async function runOPS() {
+  const btn=$('ops-btn'), term=$('ops-term');
+  btn.disabled=true; btn.innerHTML='<span class="spin"></span> &nbsp;Running...';
+  term.className='term show'; term.innerHTML='';
+  ['gen','lint','scan','build','deploy','monitor'].forEach(s=>setSt('sc-'+s,''));
+  [1,2,3,4,5].forEach(i=>$('cn-'+i).classList.remove('done'));
+  ['docker','lint','scan','obs'].forEach(s=>setSvc(s,'dot-idle','idle','r-dim'));
+
+  const currentStack = $('stack-input').value || 'python';
+  const code     = $('ops-use-code').checked ? $('lint-code').value.trim() : '';
+  const filename = $('lint-filename').value.trim() || 'train.py';
+  const image    = $('scan-image').value.trim() || STACKS[currentStack].image;
+
+  setSt('sc-gen','active');
+  setSvc('docker','dot-run','generating...','r-info');
+  termLog('t-inf',`▶ [1/6] Generating Docker artifacts for ${currentStack} stack...`);
+
+  try {
+    const res  = await fetch('/ops',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        service_name:'ml-pipeline', port: STACKS[currentStack].port,
+        image_base:image, stack:currentStack,
+        code, filename,
+        stop_on_lint:$('ops-lint').checked,
+        stop_on_scan:$('ops-scan').checked,
+        severity:'CRITICAL,HIGH'
+      })
+    });
+    const data = await res.json();
+
+    const stepMap={generate:'gen',lint:'lint',scan:'scan',build:'build',deploy:'deploy',monitor:'monitor'};
+    const connMap={lint:1,scan:2,build:3,deploy:4,monitor:5};
+    const svcMap ={generate:'docker',lint:'lint',scan:'scan',monitor:'obs'};
+
+    for (const step of data.steps) {
+      await sleep(500);
+      const sc=stepMap[step.step], cn=connMap[step.step], svc=svcMap[step.step];
+
+      if (step.status==='error') {
+        setSt('sc-'+sc,'error');
+        if(svc) setSvc(svc,'dot-err',step.message.split('—')[0].trim(),'r-err');
+        termLog('t-err',`  ✖ [${step.step.toUpperCase()}] ${step.message}`);
+        if(step.issues) step.issues.slice(0,3).forEach(i=>termLog('t-err',`     line ${i.line}: ${i.message}`));
+        if(step.vulnerabilities) step.vulnerabilities.filter(v=>v.severity==='CRITICAL').slice(0,3).forEach(v=>termLog('t-err',`     ${v.id} · ${v.package} ${v.version}`));
+        termLog('t-err','  ✖ Pipeline aborted.');
+        break;
+      }
+
+      if (step.status==='skipped') {
+        setSt('sc-'+sc,'skip');
+        if(cn) setCn('cn-'+cn);
+        if(svc) setSvc(svc,'dot-idle',step.message,'r-dim');
+        termLog('t-wrn',`  ⊘ [${step.step.toUpperCase()}] ${step.message}`);
+        continue;
+      }
+
+      setSt('sc-'+sc,'done');
+      if(cn) setCn('cn-'+cn);
+      if(svc) setSvc(svc, step.status==='warning'?'dot-warn':'dot-ok', step.status==='warning'?'warnings':'ok ✔', step.status==='warning'?'r-warn':'r-ok');
+      termLog(step.status==='warning'?'t-wrn':'t-ok',`  ✔ [${step.step.toUpperCase()}] ${step.message}`);
+    }
+
+    if (data.status==='success') {
+      await sleep(300);
+      termLog('t-ok',''); termLog('t-ok','══════════════════════════════════');
+      termLog('t-ok','  ✔ Full pipeline completed successfully');
+      termLog('t-ok','══════════════════════════════════');
+    }
+  } catch(e) { termLog('t-err',`✖ ${e.message}`); }
+  finally { btn.disabled=false; btn.innerHTML='🚀 Run Full Pipeline'; }
+}
+</script>
+</body>
+</html>

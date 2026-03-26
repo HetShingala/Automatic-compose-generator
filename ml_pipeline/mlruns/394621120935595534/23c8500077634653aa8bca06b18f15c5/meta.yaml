@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/394621120935595534/23c8500077634653aa8bca06b18f15c5/artifacts
+end_time: 1774438778234
+entry_point_name: ''
+experiment_id: '394621120935595534'
+lifecycle_stage: active
+run_id: 23c8500077634653aa8bca06b18f15c5
+run_name: clumsy-foal-58
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774438778143
+status: 3
+tags: []
+user_id: root

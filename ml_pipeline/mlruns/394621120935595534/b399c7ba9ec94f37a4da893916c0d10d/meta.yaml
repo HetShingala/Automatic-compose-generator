@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/394621120935595534/b399c7ba9ec94f37a4da893916c0d10d/artifacts
+end_time: 1774438773826
+entry_point_name: ''
+experiment_id: '394621120935595534'
+lifecycle_stage: active
+run_id: b399c7ba9ec94f37a4da893916c0d10d
+run_name: colorful-shrimp-21
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774438768783
+status: 3
+tags: []
+user_id: root
