@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/394621120935595534/a6953d8dc2ee468eaaff6510a12e647d/artifacts
+end_time: 1774530786812
+entry_point_name: ''
+experiment_id: '394621120935595534'
+lifecycle_stage: active
+run_id: a6953d8dc2ee468eaaff6510a12e647d
+run_name: thoughtful-perch-577
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774530786742
+status: 3
+tags: []
+user_id: root

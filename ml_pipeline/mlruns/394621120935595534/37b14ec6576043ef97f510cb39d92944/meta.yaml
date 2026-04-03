@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/394621120935595534/37b14ec6576043ef97f510cb39d92944/artifacts
+end_time: 1774530974470
+entry_point_name: ''
+experiment_id: '394621120935595534'
+lifecycle_stage: active
+run_id: 37b14ec6576043ef97f510cb39d92944
+run_name: judicious-smelt-947
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774530974342
+status: 3
+tags: []
+user_id: root

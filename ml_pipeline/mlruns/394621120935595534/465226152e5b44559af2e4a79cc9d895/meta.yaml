@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/394621120935595534/465226152e5b44559af2e4a79cc9d895/artifacts
+end_time: 1774592888236
+entry_point_name: ''
+experiment_id: '394621120935595534'
+lifecycle_stage: active
+run_id: 465226152e5b44559af2e4a79cc9d895
+run_name: debonair-shoat-122
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774592883072
+status: 3
+tags: []
+user_id: root

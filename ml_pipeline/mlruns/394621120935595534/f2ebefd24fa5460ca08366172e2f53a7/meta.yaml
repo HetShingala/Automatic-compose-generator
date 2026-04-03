@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/394621120935595534/f2ebefd24fa5460ca08366172e2f53a7/artifacts
+end_time: 1774530781100
+entry_point_name: ''
+experiment_id: '394621120935595534'
+lifecycle_stage: active
+run_id: f2ebefd24fa5460ca08366172e2f53a7
+run_name: hilarious-conch-825
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774530775100
+status: 3
+tags: []
+user_id: root

@@ -45,7 +45,6 @@
     .tab:last-child{border-right:none;}
     .tab:hover{color:var(--text);background:rgba(255,255,255,.02);}
     .tab.active{color:#fff;background:linear-gradient(135deg,rgba(56,189,248,.12),rgba(129,140,248,.12));border-bottom:2px solid var(--accent);}
-
     .panel{display:none;} .panel.active{display:block;}
 
     /* Card */
@@ -56,30 +55,13 @@
     .card-title{font-size:.9rem;font-weight:700;color:#fff;}
     .card-sub{font-size:.7rem;color:var(--muted);font-family:var(--mono);margin-top:1px;}
 
-    /* Form */
+    /* Form (tabs 2-4) */
     label{display:block;font-size:.68rem;font-weight:700;color:var(--muted);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.08em;font-family:var(--mono);}
     input,textarea,select{width:100%;background:var(--surface);border:1px solid var(--border2);border-radius:7px;color:var(--text);padding:.55rem .8rem;font-size:.85rem;margin-bottom:1.1rem;font-family:var(--mono);transition:border-color .2s,box-shadow .2s;}
     input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(56,189,248,.07);}
     textarea{resize:vertical;min-height:75px;}
     .hint{font-size:.68rem;color:var(--muted);margin-top:-.9rem;margin-bottom:1.1rem;font-family:var(--mono);}
-    .row2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-    .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;}
     hr{border:none;border-top:1px solid var(--border);margin:1.25rem 0;}
-
-    /* Stack selector */
-    .stack-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.5rem;margin-bottom:1.1rem;}
-    .stack-btn{padding:.5rem .4rem;background:var(--surface);border:1px solid var(--border2);border-radius:7px;color:var(--muted);font-family:var(--mono);font-size:.68rem;font-weight:600;cursor:pointer;text-align:center;transition:all .2s;line-height:1.4;}
-    .stack-btn:hover{border-color:var(--accent);color:var(--text);}
-    .stack-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(56,189,248,.08);}
-    .stack-btn .stack-icon{font-size:1.1rem;display:block;margin-bottom:.2rem;}
-
-    /* Preview box */
-    .preview{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:.75rem 1rem;font-family:var(--mono);font-size:.72rem;line-height:1.7;margin-bottom:1.1rem;color:var(--muted);display:none;}
-    .preview.show{display:block;}
-    .preview-line{color:var(--text);}
-    .preview-comment{color:var(--muted);}
-    .preview-cmd{color:var(--accent);}
-    .preview-val{color:var(--green);}
 
     /* Buttons */
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;border:none;border-radius:7px;padding:.65rem 1.1rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Syne',sans-serif;width:100%;}
@@ -127,7 +109,6 @@
     .st-l{font-family:var(--mono);font-size:.6rem;color:var(--muted);text-align:center;white-space:nowrap;}
     .conn{flex:1;height:2px;background:var(--border);min-width:16px;margin-bottom:18px;transition:background .3s;}
     .conn.done{background:var(--green);}
-
     .ops-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.25rem;}
     .ops-svc{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;}
     .ops-svc-title{font-size:.78rem;font-weight:700;color:#fff;margin-bottom:.2rem;}
@@ -140,7 +121,6 @@
     .dot-warn{background:var(--orange);}
     .dot-err {background:var(--red);}
     @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-
     .tgl-row{display:flex;align-items:center;justify-content:space-between;padding:.65rem 0;border-bottom:1px solid var(--border);}
     .tgl-row:last-child{border-bottom:none;}
     .tgl-info .tgl-title{font-size:.82rem;font-weight:600;color:var(--text);}
@@ -151,21 +131,80 @@
     .tgl-sl:before{content:'';position:absolute;width:13px;height:13px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;}
     .tgl input:checked+.tgl-sl{background:var(--accent);}
     .tgl input:checked+.tgl-sl:before{transform:translateX(15px);}
-
     .term{background:#04060d;border:1px solid var(--border);border-radius:7px;padding:.9rem 1rem;font-family:var(--mono);font-size:.72rem;line-height:1.8;min-height:110px;max-height:240px;overflow-y:auto;margin-top:1rem;display:none;}
     .term.show{display:block;}
     .term::-webkit-scrollbar{width:3px;}
     .term::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
     .t-ts{color:#1f2937;margin-right:.4rem;} .t-ok{color:var(--green);} .t-err{color:var(--red);} .t-inf{color:var(--accent);} .t-wrn{color:var(--orange);}
-
     .spin{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;}
     @keyframes spin{to{transform:rotate(360deg)}}
 
+    /* ── Generator (Tab 1) ── */
+    .gen-toolbar{display:flex;align-items:center;gap:.5rem;margin-bottom:1.1rem;flex-wrap:wrap;}
+    .gen-badge{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.2);color:var(--accent);font-family:var(--mono);font-size:.62rem;font-weight:700;padding:.15rem .55rem;border-radius:20px;}
+    .gen-spacer{flex:1;}
+    .gen-icon-btn{display:inline-flex;align-items:center;gap:.3rem;background:var(--surface);border:1px solid var(--border2);color:var(--muted);border-radius:6px;padding:.32rem .65rem;font-family:var(--mono);font-size:.68rem;cursor:pointer;transition:all .14s;white-space:nowrap;}
+    .gen-icon-btn:hover{border-color:var(--accent);color:var(--accent);}
+    .gen-icon-btn.dl{background:linear-gradient(135deg,var(--accent),var(--indigo));color:#fff;border-color:transparent;font-weight:700;}
+    .gen-icon-btn.dl:hover{opacity:.88;}
+    .gen-tpl-wrap{position:relative;}
+    .gen-tpl-menu{display:none;position:absolute;top:calc(100% + 4px);left:0;background:var(--card);border:1px solid var(--border2);border-radius:8px;z-index:200;min-width:185px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.5);}
+    .gen-tpl-menu.open{display:block;}
+    .gen-tpl-item{display:block;width:100%;text-align:left;padding:.5rem .9rem;background:none;border:none;color:var(--text);font-family:var(--mono);font-size:.72rem;cursor:pointer;transition:background .1s;}
+    .gen-tpl-item:hover{background:var(--surface);}
+    .svc-list{display:flex;flex-direction:column;gap:.55rem;margin-bottom:.9rem;}
+    .svc-card{background:var(--surface);border:1px solid var(--border2);border-radius:9px;overflow:hidden;transition:border-color .18s;}
+    .svc-card:hover{border-color:rgba(56,189,248,.3);}
+    .svc-hdr{display:flex;align-items:center;gap:.5rem;padding:.5rem .8rem;cursor:pointer;user-select:none;}
+    .svc-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+    .svc-dot.build{background:var(--accent);} .svc-dot.image{background:var(--green);}
+    .svc-name{background:none;border:none;color:#fff;font-family:var(--mono);font-size:.82rem;font-weight:700;flex:1;outline:none;min-width:0;}
+    .svc-name::placeholder{color:var(--muted);}
+    .svc-meta{font-size:.62rem;color:var(--muted);white-space:nowrap;font-family:var(--mono);max-width:160px;overflow:hidden;text-overflow:ellipsis;}
+    .svc-chev{font-size:.62rem;color:var(--muted);transition:transform .16s;flex-shrink:0;}
+    .svc-card.collapsed .svc-chev{transform:rotate(-90deg);}
+    .svc-del{background:none;border:none;color:var(--muted);cursor:pointer;padding:.15rem .3rem;border-radius:3px;font-size:.78rem;line-height:1;transition:color .14s;flex-shrink:0;}
+    .svc-del:hover{color:var(--red);}
+    .svc-body{padding:.8rem;display:flex;flex-direction:column;gap:.6rem;border-top:1px solid var(--border);}
+    .svc-card.collapsed .svc-body{display:none;}
+    .type-tog{display:flex;border:1px solid var(--border2);border-radius:5px;overflow:hidden;width:fit-content;}
+    .type-tog button{background:none;border:none;color:var(--muted);font-family:var(--mono);font-size:.62rem;padding:.2rem .65rem;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;transition:all .13s;}
+    .type-tog button.active{background:var(--accent);color:#000;font-weight:700;}
+    .sf{display:flex;flex-direction:column;gap:.2rem;}
+    .sl{font-size:.59rem;color:var(--muted);letter-spacing:.09em;text-transform:uppercase;font-family:var(--mono);}
+    .sl span{text-transform:none;letter-spacing:0;font-size:.57rem;}
+    .si{background:var(--bg);border:1px solid var(--border);border-radius:5px;color:var(--text);font-family:var(--mono);font-size:.78rem;padding:.3rem .58rem;width:100%;outline:none;transition:border-color .13s;margin:0;}
+    .si:focus{border-color:var(--accent);}
+    .si::placeholder{color:var(--muted);font-size:.7rem;}
+    textarea.si{resize:vertical;min-height:48px;line-height:1.5;}
+    select.si{cursor:pointer;}
+    .sf2{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;}
+    .hc-row{display:flex;align-items:center;gap:.5rem;}
+    .hc-body{display:none;flex-direction:column;gap:.45rem;margin-top:.4rem;}
+    .hc-body.open{display:flex;}
+    .svc-add-ph{border:1px dashed var(--border2);border-radius:8px;padding:.8rem;text-align:center;color:var(--muted);font-size:.72rem;cursor:pointer;font-family:var(--mono);transition:all .14s;margin-bottom:.9rem;}
+    .svc-add-ph:hover{border-color:var(--accent);color:var(--accent);background:rgba(56,189,248,.04);}
+    .named-section{background:var(--surface);border:1px solid var(--border2);border-radius:8px;padding:.7rem .85rem;margin-bottom:.9rem;}
+    .named-hdr{display:flex;align-items:center;gap:.5rem;margin-bottom:.45rem;}
+    .named-lbl{font-size:.6rem;color:var(--muted);letter-spacing:.09em;text-transform:uppercase;font-family:var(--mono);flex:1;}
+    .yaml-wrap{background:var(--bg);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:.9rem;display:none;}
+    .yaml-wrap.show{display:block;}
+    .yaml-bar{display:flex;align-items:center;gap:.6rem;padding:.42rem .85rem;border-bottom:1px solid var(--border);background:rgba(255,255,255,.018);}
+    .yaml-fname{font-family:var(--mono);font-size:.67rem;color:var(--accent);}
+    .yaml-spacer{flex:1;}
+    .yaml-code{padding:.9rem 1rem;font-family:var(--mono);font-size:.72rem;line-height:1.7;white-space:pre;overflow-x:auto;color:var(--text);max-height:300px;overflow-y:auto;}
+    .yaml-code::-webkit-scrollbar{width:3px;height:3px;}
+    .yaml-code::-webkit-scrollbar-thumb{background:var(--border2);}
+    .yk{color:#7dd3fc;} .yv{color:#86efac;} .ys{color:#fde68a;}
+    .zip-info{background:rgba(52,211,153,.05);border:1px solid rgba(52,211,153,.18);border-radius:7px;padding:.65rem .85rem;margin-bottom:.9rem;font-family:var(--mono);font-size:.7rem;line-height:1.8;color:var(--muted);display:none;}
+    .zip-info.show{display:block;}
+    .zip-info strong{color:var(--green);}
+
     @media(max-width:600px){
-      .row2,.row3{grid-template-columns:1fr;}
       .ops-grid{grid-template-columns:1fr;}
       .chips{display:none;}
-      .stack-grid{grid-template-columns:repeat(3,1fr);}
+      .gen-toolbar{gap:.35rem;}
+      .sf2{grid-template-columns:1fr;}
     }
   </style>
 </head>
@@ -176,7 +215,7 @@
     <div class="hdr-icon">🐳</div>
     <div>
       <h1>MLOps Control Panel</h1>
-      <p>compose_generator · v2.1.0 · localhost:5050</p>
+      <p>compose_generator · v2.2.0 · localhost:5050</p>
     </div>
     <div class="chips">
       <span class="chip chip-b">DOCKER</span>
@@ -199,64 +238,67 @@
         <div class="card-ico ico-b">⚙️</div>
         <div>
           <div class="card-title">Docker Compose Generator</div>
-          <div class="card-sub">Supports Python · Node.js · PHP/Laravel · Ruby · Go</div>
+          <div class="card-sub">Add services · configure each · download docker-compose.yml + Dockerfiles</div>
         </div>
       </div>
 
-      <form action="/generate" method="POST" id="gen-form">
-
-        <!-- Stack selector -->
-        <label>Project Stack</label>
-        <div class="stack-grid">
-          <button type="button" class="stack-btn active" data-stack="python"  onclick="selectStack('python')">
-            <span class="stack-icon">🐍</span>Python
-          </button>
-          <button type="button" class="stack-btn" data-stack="node" onclick="selectStack('node')">
-            <span class="stack-icon">🟢</span>Node.js
-          </button>
-          <button type="button" class="stack-btn" data-stack="php" onclick="selectStack('php')">
-            <span class="stack-icon">🐘</span>PHP/Laravel
-          </button>
-          <button type="button" class="stack-btn" data-stack="ruby" onclick="selectStack('ruby')">
-            <span class="stack-icon">💎</span>Ruby
-          </button>
-          <button type="button" class="stack-btn" data-stack="go" onclick="selectStack('go')">
-            <span class="stack-icon">🔵</span>Go
-          </button>
-        </div>
-        <input type="hidden" name="stack" id="stack-input" value="python"/>
-
-        <!-- Dockerfile preview -->
-        <label>Generated Install Commands <span style="color:var(--muted);text-transform:none;letter-spacing:0;font-size:.68rem;">(auto-updates with stack)</span></label>
-        <div class="preview show" id="install-preview"></div>
-
-        <div class="row2">
-          <div>
-            <label>Service Name</label>
-            <input type="text" name="service_name" placeholder="ml-pipeline" value="ml-pipeline"/>
-          </div>
-          <div>
-            <label>Port</label>
-            <input type="text" name="port" id="port-input" placeholder="8080" value="8080"/>
+      <div class="gen-toolbar">
+        <span class="gen-badge" id="gen-badge">0 services</span>
+        <button class="gen-icon-btn" onclick="genAdd()">＋ Add Service</button>
+        <div class="gen-tpl-wrap">
+          <button class="gen-icon-btn" onclick="genTplToggle(event)">⊞ Templates ▾</button>
+          <div class="gen-tpl-menu" id="gen-tpl-menu">
+            <button class="gen-tpl-item" onclick="genTpl('ml-pipeline')">🤖 ML Pipeline (build)</button>
+            <button class="gen-tpl-item" onclick="genTpl('mlflow')">📦 MLflow</button>
+            <button class="gen-tpl-item" onclick="genTpl('prometheus')">📊 Prometheus</button>
+            <button class="gen-tpl-item" onclick="genTpl('grafana')">📈 Grafana</button>
+            <button class="gen-tpl-item" onclick="genTpl('node-exporter')">🔍 Node Exporter</button>
+            <button class="gen-tpl-item" onclick="genTpl('postgres')">🐘 Postgres</button>
+            <button class="gen-tpl-item" onclick="genTpl('redis')">🔴 Redis</button>
           </div>
         </div>
+        <div class="gen-spacer"></div>
+        <button class="gen-icon-btn" id="gen-preview-btn" onclick="genTogglePreview()">👁 Preview</button>
+        <button class="gen-icon-btn" onclick="genClear()">🗑 Clear</button>
+        <button class="gen-icon-btn dl" onclick="genDownload()">⬇ Download ZIP</button>
+      </div>
 
-        <label>Base Image</label>
-        <input type="text" name="image_base" id="image-input" placeholder="python:3.11-slim" value="python:3.11-slim"/>
+      <div class="zip-info" id="gen-zip-info"></div>
+      <div class="svc-list" id="svc-list"></div>
 
-        <hr/>
+      <div class="svc-add-ph" onclick="genAdd()">
+        <div style="font-size:1.2rem;margin-bottom:.2rem;">＋</div>
+        Add Service
+      </div>
 
-        <label>Environment Variables</label>
-        <textarea name="env_vars" placeholder="MODEL_PATH=/app/models/model.pkl&#10;LOG_LEVEL=INFO"></textarea>
-        <p class="hint">One KEY=VALUE per line · leave blank if none</p>
+      <div class="named-section">
+        <div class="named-hdr">
+          <span class="named-lbl">Named Volumes</span>
+          <span style="font-size:.6rem;color:var(--muted);font-family:var(--mono);">one per line</span>
+        </div>
+        <textarea class="si" id="gen-named-vols" style="min-height:42px;margin:0;"
+                  placeholder="grafana_data&#10;pgdata" oninput="genSchedulePreview()"></textarea>
+      </div>
 
-        <label>Volume Mounts</label>
-        <textarea name="volumes" placeholder="./models:/app/models&#10;./reports:/app/reports"></textarea>
-        <p class="hint">One host:container per line · leave blank if none</p>
+      <div class="named-section">
+        <div class="named-hdr">
+          <span class="named-lbl">Named Networks</span>
+          <span style="font-size:.6rem;color:var(--muted);font-family:var(--mono);">one per line</span>
+        </div>
+        <textarea class="si" id="gen-named-nets" style="min-height:42px;margin:0;"
+                  placeholder="app-net&#10;monitoring" oninput="genSchedulePreview()"></textarea>
+      </div>
 
-        <hr/>
-        <button type="submit" class="btn btn-blue">⬇ Generate &amp; Download</button>
-      </form>
+      <div class="yaml-wrap" id="gen-yaml-wrap">
+        <div class="yaml-bar">
+          <span class="yaml-fname">docker-compose.yml</span>
+          <div class="yaml-spacer"></div>
+          <button class="gen-icon-btn" onclick="genCopyYaml()">⧉ Copy</button>
+        </div>
+        <div class="yaml-code" id="gen-yaml-code"></div>
+      </div>
+
+      <button class="btn btn-blue" onclick="genDownload()">⬇ Generate &amp; Download ZIP</button>
     </div>
   </div>
 
@@ -271,11 +313,19 @@
         </div>
       </div>
       <label>Filename</label>
-      <input type="text" id="lint-filename" placeholder="train.py" value="train.py"/>
-      <label>Python Code</label>
-      <textarea id="lint-code" style="min-height:160px;font-size:.78rem;" placeholder="# Paste your Python file here..."></textarea>
-      <div style="display:flex;gap:.6rem;margin-bottom:1.1rem;">
-        <button class="btn btn-ghost" onclick="loadSample()">Load Sample</button>
+      <input type="text" id="lint-filename" placeholder="train.py or Dockerfile" value="train.py" oninput="updateFileTypeBadge()"/>
+
+      <div style="display:flex;align-items:center;gap:.5rem;margin-top:-.7rem;margin-bottom:1rem;">
+        <span style="font-family:var(--mono);font-size:.68rem;color:var(--muted);">Detected type:</span>
+        <span id="filetype-badge" class="chip chip-b" style="font-size:.68rem;">🐍 Python</span>
+      </div>
+
+      <label>Code</label>
+      <textarea id="lint-code" style="min-height:160px;font-size:.78rem;" placeholder="# Paste Python code or a Dockerfile here..." oninput="updateFileTypeBadge()"></textarea>
+
+      <div style="display:flex;gap:.6rem;margin-bottom:1.1rem;flex-wrap:wrap;">
+        <button class="btn btn-ghost" onclick="loadSample('python')">🐍 Python Sample</button>
+        <button class="btn btn-ghost" onclick="loadSample('dockerfile')">🐳 Dockerfile Sample</button>
         <button class="btn btn-ghost" onclick="clearLint()">Clear</button>
       </div>
       <button class="btn btn-blue" id="lint-btn" onclick="runLint()">🔍 Run Linting</button>
@@ -376,66 +426,348 @@
         </div>
       </div>
 
+      <div style="margin-bottom:1rem;">
+        <label>Project Directory <span style="font-size:.68rem;color:var(--muted);text-transform:none;letter-spacing:0;">(folder containing your docker-compose.yml)</span></label>
+        <input type="text" id="ops-project-dir" placeholder="/home/het/Documents/Evaluation-task/src/ml_pipeline" style="margin-bottom:.35rem;"/>
+        <p class="hint" style="margin-top:0;">Leave blank to use Flask working directory</p>
+      </div>
       <button class="btn btn-green" id="ops-btn" onclick="runOPS()">🚀 Run Full Pipeline</button>
       <div class="term" id="ops-term"></div>
     </div>
   </div>
 
-</div>
+</div><!-- .shell -->
 
 <script>
-const $ = id => document.getElementById(id);
-const sleep = ms => new Promise(r => setTimeout(r, ms));
+const $  = id => document.getElementById(id);
+const sleep = ms => new Promise(r => setTimeout(r,ms));
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const ts  = () => new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
 
 // ── Tab switching ──────────────────────────────────────────
 function switchTab(name) {
   ['generator','linting','scanning','ops'].forEach((n,i) => {
-    document.querySelectorAll('.tab')[i].classList.toggle('active', n === name);
-    $('panel-'+n).classList.toggle('active', n === name);
+    document.querySelectorAll('.tab')[i].classList.toggle('active', n===name);
+    $('panel-'+n).classList.toggle('active', n===name);
+  });
+  if (name==='generator') genSchedulePreview();
+}
+
+// ═══════════════════════════════════════════════════════════
+//  GENERATOR  (multi-service, with networks)
+// ═══════════════════════════════════════════════════════════
+let genServices = [], genIdCtr = 0;
+
+const TPL = {
+  'ml-pipeline':  { name:'ml-pipeline',  type:'build', build:'.', base_image:'', stack:'python',
+    image:'', ports:['8080:8080'], volumes:['./models:/app/models','./reports:/app/reports'],
+    environment:['MLFLOW_TRACKING_URI=http://mlflow:5000','GIT_PYTHON_REFRESH=quiet'],
+    command:'', depends_on:['mlflow','prometheus'], networks:[], restart:'', healthcheck:{} },
+  'mlflow':        { name:'mlflow',        type:'image', build:'', base_image:'', stack:'python',
+    image:'ghcr.io/mlflow/mlflow:latest', ports:['5000:5000'], volumes:['./mlruns:/mlruns'],
+    environment:[], command:'mlflow server\n--host 0.0.0.0\n--port 5000\n--backend-store-uri /mlruns\n--allowed-hosts "*"',
+    depends_on:[], networks:[], restart:'',
+    healthcheck:{ test:'curl -f http://localhost:5000/health', interval:'5s', timeout:'5s', retries:'10', start_period:'10s' } },
+  'prometheus':    { name:'prometheus',    type:'image', build:'', base_image:'', stack:'python',
+    image:'prom/prometheus:latest', ports:['9090:9090'],
+    volumes:['./prometheus.yml:/etc/prometheus/prometheus.yml'], environment:[],
+    command:'--config.file=/etc/prometheus/prometheus.yml', depends_on:[], networks:[], restart:'', healthcheck:{} },
+  'grafana':       { name:'grafana',       type:'image', build:'', base_image:'', stack:'python',
+    image:'grafana/grafana:latest', ports:['3000:3000'],
+    volumes:['grafana_data:/var/lib/grafana','./grafana/provisioning:/etc/grafana/provisioning'],
+    environment:['GF_SECURITY_ADMIN_USER=admin','GF_SECURITY_ADMIN_PASSWORD=admin'],
+    command:'', depends_on:['prometheus'], networks:[], restart:'', healthcheck:{} },
+  'node-exporter': { name:'node-exporter', type:'image', build:'', base_image:'', stack:'python',
+    image:'prom/node-exporter:latest', ports:['9100:9100'], volumes:['./reports:/reports:ro'],
+    environment:[], command:'--collector.textfile.directory=/reports\n--collector.textfile',
+    depends_on:[], networks:[], restart:'', healthcheck:{} },
+  'postgres':      { name:'postgres',      type:'image', build:'', base_image:'', stack:'python',
+    image:'postgres:16-alpine', ports:['5432:5432'], volumes:['pgdata:/var/lib/postgresql/data'],
+    environment:['POSTGRES_USER=admin','POSTGRES_PASSWORD=secret','POSTGRES_DB=appdb'],
+    command:'', depends_on:[], networks:[], restart:'unless-stopped', healthcheck:{} },
+  'redis':         { name:'redis',         type:'image', build:'', base_image:'', stack:'python',
+    image:'redis:7-alpine', ports:['6379:6379'], volumes:[],
+    environment:[], command:'redis-server --appendonly yes',
+    depends_on:[], networks:[], restart:'unless-stopped', healthcheck:{} },
+};
+
+const gVal   = id => ($(id)?.value || '').trim();
+const gLines = id => ($(id)?.value || '').split('\n').map(l=>l.trim()).filter(Boolean);
+
+function genRead(id) {
+  const svc = genServices.find(s=>s.id===id);
+  if (!svc) return null;
+  svc.name        = gVal(`g-${id}-name`);
+  // type is authoritatively stored on svc object (set by genAdd/genSetType), don't re-read from DOM
+  svc.build       = gVal(`g-${id}-build`);
+  svc.base_image  = gVal(`g-${id}-bimg`);
+  svc.stack       = gVal(`g-${id}-stack`) || 'python';
+  svc.image       = gVal(`g-${id}-image`);
+  svc.ports       = gLines(`g-${id}-ports`);
+  svc.volumes     = gLines(`g-${id}-vols`);
+  svc.environment = gLines(`g-${id}-env`);
+  svc.command     = gVal(`g-${id}-cmd`);
+  svc.depends_on  = gLines(`g-${id}-deps`);
+  svc.networks    = gLines(`g-${id}-nets`);
+  svc.restart     = gVal(`g-${id}-restart`);
+  const hcOn = $(`g-${id}-hc-on`)?.checked;
+  svc.healthcheck = hcOn ? {
+    test:         gVal(`g-${id}-hc-test`),
+    interval:     gVal(`g-${id}-hc-iv`),
+    timeout:      gVal(`g-${id}-hc-to`),
+    retries:      gVal(`g-${id}-hc-re`),
+    start_period: gVal(`g-${id}-hc-sp`),
+  } : {};
+  return svc;
+}
+
+function genCollect()   { return genServices.map(s=>genRead(s.id)).filter(Boolean); }
+function genNamedVols() { return ($('gen-named-vols')?.value||'').split('\n').map(l=>l.trim()).filter(Boolean); }
+function genNamedNets() { return ($('gen-named-nets')?.value||'').split('\n').map(l=>l.trim()).filter(Boolean); }
+
+function genUpdateBadge() {
+  const n = genServices.length;
+  $('gen-badge').textContent = `${n} service${n===1?'':'s'}`;
+  const all=genCollect(), builds=all.filter(s=>s.type==='build'), imgs=all.filter(s=>s.type!=='build');
+  const info=$('gen-zip-info');
+  if (!n) { info.className='zip-info'; return; }
+  info.className='zip-info show';
+  let lines=['<strong>ZIP contents:</strong>  docker-compose.yml'];
+  if (builds.length===1) lines.push('&nbsp;&nbsp;Dockerfile &nbsp; entrypoint.sh');
+  else builds.forEach(s=>lines.push(`&nbsp;&nbsp;${s.name}/Dockerfile &nbsp; ${s.name}/entrypoint.sh`));
+  if (imgs.length) lines.push(`&nbsp;&nbsp;<span style="color:var(--muted)">${imgs.map(s=>s.name).join(', ')} — image services (no Dockerfile)</span>`);
+  const nets=genNamedNets(); if(nets.length) lines.push(`&nbsp;&nbsp;<span style="color:var(--muted)">networks: ${nets.join(', ')}</span>`);
+  info.innerHTML=lines.join('<br>');
+}
+
+function genAdd(tpl=null) {
+  const id=++genIdCtr;
+  const svc={id,...(tpl||{name:`service-${id}`,type:'image',build:'.',base_image:'',stack:'python',
+    image:'',ports:[],volumes:[],environment:[],command:'',depends_on:[],networks:[],restart:'',healthcheck:{}})};
+  genServices.push(svc);
+  genRenderCard(svc);
+  genUpdateBadge();
+  genSchedulePreview();
+}
+function genTpl(name){ genTplClose(); if(TPL[name]) genAdd({...TPL[name]}); }
+
+function genDelete(id) {
+  genServices=genServices.filter(s=>s.id!==id);
+  const el=$(`g-card-${id}`);
+  if(el){el.style.cssText='opacity:0;transform:translateX(-8px);transition:.14s';setTimeout(()=>el.remove(),140);}
+  genUpdateBadge(); genSchedulePreview();
+}
+
+function genClear() {
+  if(!genServices.length) return;
+  if(!confirm('Remove all services?')) return;
+  genServices=[];
+  $('svc-list').innerHTML='';
+  $('gen-named-vols').value='';
+  $('gen-named-nets').value='';
+  $('gen-yaml-wrap').className='yaml-wrap';
+  $('gen-zip-info').className='zip-info';
+  genUpdateBadge();
+}
+
+function genRenderCard(svc) {
+  const id=svc.id;
+  const div=document.createElement('div');
+  div.className='svc-card'; div.id=`g-card-${id}`;
+  div.style.cssText='opacity:0;transform:translateY(5px);';
+  div.innerHTML=`
+    <div class="svc-hdr" onclick="genToggle(${id})">
+      <span class="svc-dot ${svc.type}" id="g-dot-${id}"></span>
+      <input class="svc-name" id="g-${id}-name" value="${esc(svc.name)}" placeholder="service-name"
+             onclick="event.stopPropagation()" oninput="genSchedulePreview()"/>
+      <span class="svc-meta" id="g-meta-${id}">${esc(svc.image||svc.build||'')}</span>
+      <span class="svc-chev">▾</span>
+      <button class="svc-del" onclick="event.stopPropagation();genDelete(${id})" title="Remove">✕</button>
+    </div>
+    <div class="svc-body">
+      <div class="type-tog">
+        <button data-type="build" class="${svc.type==='build'?'active':''}" onclick="genSetType(${id},'build')">build</button>
+        <button data-type="image" class="${svc.type==='image'?'active':''}" onclick="genSetType(${id},'image')">image</button>
+      </div>
+      <div id="g-${id}-build-row" style="${svc.type==='build'?'':'display:none'}">
+        <div class="sf" style="margin-bottom:.45rem;">
+          <span class="sl">Build Context</span>
+          <input class="si" id="g-${id}-build" value="${esc(svc.build||'.')}" placeholder="." oninput="genSchedulePreview()"/>
+        </div>
+        <div class="sf" style="margin-bottom:.45rem;">
+          <span class="sl">Base Image <span>for generated Dockerfile — blank = stack default</span></span>
+          <input class="si" id="g-${id}-bimg" value="${esc(svc.base_image||'')}" placeholder="python:3.11-slim" oninput="genSchedulePreview()"/>
+        </div>
+        <div class="sf">
+          <span class="sl">Stack</span>
+          <select class="si" id="g-${id}-stack" onchange="genSchedulePreview()">
+            <option value="python" ${(svc.stack||'python')==='python'?'selected':''}>🐍 Python</option>
+            <option value="node"   ${svc.stack==='node'?'selected':''}>🟢 Node.js</option>
+            <option value="php"    ${svc.stack==='php'?'selected':''}>🐘 PHP</option>
+            <option value="ruby"   ${svc.stack==='ruby'?'selected':''}>💎 Ruby</option>
+            <option value="go"     ${svc.stack==='go'?'selected':''}>🔵 Go</option>
+          </select>
+        </div>
+      </div>
+      <div class="sf" id="g-${id}-image-row" style="${svc.type==='image'?'':'display:none'}">
+        <span class="sl">Image</span>
+        <input class="si" id="g-${id}-image" value="${esc(svc.image||'')}" placeholder="python:3.11-slim"
+               oninput="genMeta(${id});genSchedulePreview()"/>
+      </div>
+      <div class="sf">
+        <span class="sl">Ports <span>host:container, one per line</span></span>
+        <textarea class="si" id="g-${id}-ports" placeholder="8080:8080" oninput="genSchedulePreview()">${(svc.ports||[]).join('\n')}</textarea>
+      </div>
+      <div class="sf">
+        <span class="sl">Volumes <span>host:container or name:path</span></span>
+        <textarea class="si" id="g-${id}-vols" placeholder="./data:/app/data" oninput="genSchedulePreview()">${(svc.volumes||[]).join('\n')}</textarea>
+      </div>
+      <div class="sf">
+        <span class="sl">Environment <span>KEY=VALUE per line</span></span>
+        <textarea class="si" id="g-${id}-env" placeholder="DEBUG=true" oninput="genSchedulePreview()">${(svc.environment||[]).join('\n')}</textarea>
+      </div>
+      <div class="sf">
+        <span class="sl">Command <span>multiline = block scalar</span></span>
+        <textarea class="si" id="g-${id}-cmd" style="min-height:40px;" placeholder="python server.py" oninput="genSchedulePreview()">${esc(svc.command||'')}</textarea>
+      </div>
+      <div class="sf2">
+        <div class="sf">
+          <span class="sl">Depends On <span>one per line</span></span>
+          <textarea class="si" id="g-${id}-deps" style="min-height:38px;" placeholder="mlflow" oninput="genSchedulePreview()">${(svc.depends_on||[]).join('\n')}</textarea>
+        </div>
+        <div class="sf">
+          <span class="sl">Networks <span>one per line</span></span>
+          <textarea class="si" id="g-${id}-nets" style="min-height:38px;" placeholder="app-net" oninput="genSchedulePreview()">${(svc.networks||[]).join('\n')}</textarea>
+        </div>
+      </div>
+      <div class="sf">
+        <span class="sl">Restart Policy</span>
+        <select class="si" id="g-${id}-restart" onchange="genSchedulePreview()">
+          <option value=""               ${!svc.restart?'selected':''}>— none —</option>
+          <option value="always"         ${svc.restart==='always'?'selected':''}>always</option>
+          <option value="unless-stopped" ${svc.restart==='unless-stopped'?'selected':''}>unless-stopped</option>
+          <option value="on-failure"     ${svc.restart==='on-failure'?'selected':''}>on-failure</option>
+          <option value="no"             ${svc.restart==='no'?'selected':''}>no</option>
+        </select>
+      </div>
+      <div class="sf">
+        <div class="hc-row">
+          <label class="tgl" style="margin:0;">
+            <input type="checkbox" id="g-${id}-hc-on" ${svc.healthcheck?.test?'checked':''}
+                   onchange="genHcToggle(${id});genSchedulePreview()">
+            <div class="tgl-sl"></div>
+          </label>
+          <span class="sl" style="margin:0;">Healthcheck</span>
+        </div>
+        <div class="hc-body ${svc.healthcheck?.test?'open':''}" id="g-${id}-hc-body">
+          <div class="sf" style="margin-top:.35rem;">
+            <span class="sl">Test</span>
+            <input class="si" id="g-${id}-hc-test" value="${esc(svc.healthcheck?.test||'')}"
+                   placeholder='curl -f http://localhost:8080/health' oninput="genSchedulePreview()"/>
+          </div>
+          <div class="sf2">
+            <div class="sf"><span class="sl">Interval</span><input class="si" id="g-${id}-hc-iv" value="${esc(svc.healthcheck?.interval||'30s')}" oninput="genSchedulePreview()"/></div>
+            <div class="sf"><span class="sl">Timeout</span><input class="si" id="g-${id}-hc-to" value="${esc(svc.healthcheck?.timeout||'10s')}" oninput="genSchedulePreview()"/></div>
+            <div class="sf"><span class="sl">Retries</span><input class="si" id="g-${id}-hc-re" value="${esc(svc.healthcheck?.retries||'3')}" oninput="genSchedulePreview()"/></div>
+            <div class="sf"><span class="sl">Start Period</span><input class="si" id="g-${id}-hc-sp" value="${esc(svc.healthcheck?.start_period||'10s')}" oninput="genSchedulePreview()"/></div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  $('svc-list').appendChild(div);
+  requestAnimationFrame(()=>{div.style.transition='opacity .17s,transform .17s';div.style.opacity='1';div.style.transform='translateY(0)';});
+}
+
+function genSetType(id,type){
+  const svc=genServices.find(s=>s.id===id); if(svc) svc.type=type;
+  document.querySelectorAll(`#g-card-${id} .type-tog button`).forEach(b=>b.classList.toggle('active',b.dataset.type===type));
+  $(`g-dot-${id}`).className=`svc-dot ${type}`;
+  $(`g-${id}-build-row`).style.display=type==='build'?'':'none';
+  $(`g-${id}-image-row`).style.display=type==='image'?'':'none';
+  genSchedulePreview();
+}
+function genToggle(id){ $(`g-card-${id}`).classList.toggle('collapsed'); }
+function genHcToggle(id){ $(`g-${id}-hc-body`).classList.toggle('open',$(`g-${id}-hc-on`).checked); }
+function genMeta(id){ const m=$(`g-meta-${id}`); if(m) m.textContent=$(`g-${id}-image`)?.value||''; }
+function genTplToggle(e){ e.stopPropagation(); $('gen-tpl-menu').classList.toggle('open'); }
+function genTplClose()  { $('gen-tpl-menu').classList.remove('open'); }
+document.addEventListener('click', genTplClose);
+
+let _pvTimer=null;
+function genSchedulePreview(){ clearTimeout(_pvTimer); _pvTimer=setTimeout(()=>{ if($('gen-yaml-wrap').classList.contains('show')) genPreview(); },380); }
+
+function genTogglePreview(){
+  const wrap=$('gen-yaml-wrap'), btn=$('gen-preview-btn');
+  const isOpen=wrap.classList.contains('show');
+  if(isOpen){ wrap.className='yaml-wrap'; btn.textContent='👁 Preview'; return; }
+  genPreview();
+}
+
+async function genPreview(){
+  const svcs=genCollect(); genUpdateBadge();
+  if(!svcs.length){ $('gen-yaml-wrap').className='yaml-wrap'; $('gen-preview-btn').textContent='👁 Preview'; return; }
+  try {
+    const r=await fetch('/preview-multi',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({services:svcs,named_volumes:genNamedVols(),named_networks:genNamedNets()})});
+    const d=await r.json(); genShowYaml(d.yaml||'');
+  } catch { genShowYaml(genLocalYaml(svcs,genNamedVols(),genNamedNets())); }
+  $('gen-preview-btn').textContent='👁 Hide Preview';
+}
+
+function genShowYaml(yaml){
+  $('gen-yaml-wrap').className='yaml-wrap show';
+  $('gen-yaml-code').innerHTML=yaml.split('\n').map(line=>{
+    const e=line.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    if(/^\s*#/.test(line)) return `<span style="color:var(--muted);font-style:italic">${e}</span>`;
+    const kv=e.match(/^(\s*)([\w\-\.]+)(\s*:\s*)(.*)$/);
+    if(kv){const v=kv[4];const vs=v.startsWith('"')||v.startsWith("'")?`<span class="ys">${v}</span>`:v?`<span class="yv">${v}</span>`:'';return `${kv[1]}<span class="yk">${kv[2]}</span>${kv[3]}${vs}`;}
+    if(/^\s*-\s/.test(line)) return e.replace(/^(\s*-\s)(.*)$/,'$1<span class="ys">$2</span>');
+    return e;
+  }).join('\n');
+}
+
+function genLocalYaml(svcs,namedVols,namedNets){
+  let o='services:\n';
+  for(const s of svcs){
+    o+=`  ${s.name}:\n`;
+    if(s.type==='build') o+=`    build: ${s.build||'.'}\n`;
+    else if(s.image)     o+=`    image: ${s.image}\n`;
+    if(s.ports?.length){o+='    ports:\n';s.ports.forEach(p=>{o+=`      - "${p}"\n`;});}
+    if(s.volumes?.length){o+='    volumes:\n';s.volumes.forEach(v=>{o+=`      - ${v}\n`;});}
+    if(s.environment?.length){o+='    environment:\n';s.environment.forEach(e=>{o+=`      - ${e}\n`;});}
+    if(s.command?.trim()){const cl=s.command.split('\n').map(l=>l.trim()).filter(Boolean);if(cl.length===1)o+=`    command: ${cl[0]}\n`;else{o+='    command: >\n';cl.forEach(l=>{o+=`      ${l}\n`;});}}
+    if(s.depends_on?.length){o+='    depends_on:\n';s.depends_on.forEach(d=>{o+=`      - ${d}\n`;});}
+    if(s.networks?.length){o+='    networks:\n';s.networks.forEach(n=>{o+=`      - ${n}\n`;});}
+    if(s.restart) o+=`    restart: ${s.restart}\n`;
+    if(s.healthcheck?.test){const hc=s.healthcheck;o+='    healthcheck:\n';o+=`      test: ["CMD-SHELL","${hc.test}"]\n`;['interval','timeout','retries','start_period'].forEach(k=>{if(hc[k])o+=`      ${k}: ${hc[k]}\n`;});}
+    o+='\n';
+  }
+  if(namedVols?.length){o+='volumes:\n';namedVols.forEach(v=>{o+=`  ${v}:\n`;});}
+  if(namedNets?.length){o+='networks:\n';namedNets.forEach(n=>{o+=`  ${n}:\n`;});}
+  return o;
+}
+
+function genCopyYaml(){
+  navigator.clipboard.writeText($('gen-yaml-code')?.innerText||'').then(()=>{
+    const btn=event.target.closest('button'),orig=btn.innerHTML;
+    btn.innerHTML='✔ Copied!';setTimeout(()=>btn.innerHTML=orig,1500);
   });
 }
 
-// ── Stack configs (mirrors STACK_CONFIGS in composer.py) ───
-const STACKS = {
-  python: { copy: 'COPY requirements.txt .', install: 'RUN pip install --no-cache-dir -r requirements.txt', image: 'python:3.11-slim', port: '8080' },
-  node:   { copy: 'COPY package*.json .',     install: 'RUN npm install --production',                       image: 'node:20-slim',      port: '3000' },
-  php:    { copy: 'COPY composer.json composer.lock .', install: 'RUN composer install --no-dev --optimize-autoloader', image: 'php:8.2-fpm', port: '9000' },
-  ruby:   { copy: 'COPY Gemfile Gemfile.lock .', install: 'RUN bundle install --without development test',   image: 'ruby:3.2-slim',     port: '3000' },
-  go:     { copy: 'COPY go.mod go.sum .',     install: 'RUN go mod download',                                image: 'golang:1.21-alpine',port: '8080' },
-};
-
-function selectStack(stack) {
-  // Update active button
-  document.querySelectorAll('.stack-btn').forEach(b => b.classList.toggle('active', b.dataset.stack === stack));
-  $('stack-input').value = stack;
-
-  const cfg = STACKS[stack];
-
-  // Auto-fill image and port
-  $('image-input').value = cfg.image;
-  $('port-input').value  = cfg.port;
-
-  // Also update scan image to match
-  $('scan-image').value  = cfg.image;
-
-  // Update preview
-  const preview = $('install-preview');
-  preview.innerHTML = `
-    <span class="preview-comment"># dependency copy (cached layer)</span><br>
-    <span class="preview-line">${esc(cfg.copy)}</span><br>
-    <span class="preview-comment"># install dependencies</span><br>
-    <span class="preview-line">${esc(cfg.install)}</span>
-  `;
-  preview.className = 'preview show';
+async function genDownload(){
+  const svcs=genCollect();
+  if(!svcs.length){alert('Add at least one service first.');return;}
+  console.log('Sending services:', JSON.stringify(svcs.map(s=>({name:s.name,type:s.type}))));
+  const r=await fetch('/generate-multi',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({services:svcs,named_volumes:genNamedVols(),named_networks:genNamedNets()})});
+  const blob=await r.blob();
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='docker_output.zip'; a.click();
 }
 
-// Init preview on load
-selectStack('python');
-
-// ── LINTING ───────────────────────────────────────────────
-const SAMPLE = `import os, json
+// ═══════════════════════════════════════════════════════════
+//  LINTING  — copied exactly from original
+// ═══════════════════════════════════════════════════════════
+const SAMPLE_PYTHON = `import os, json
 import pickle
 import numpy as np
 import pandas as pd
@@ -459,78 +791,115 @@ if __name__ == "__main__":
     print(f"Accuracy: {accuracy}")
 `;
 
-function loadSample() { $('lint-code').value = SAMPLE; $('lint-filename').value = 'train.py'; }
-function clearLint()  { $('lint-code').value = ''; const r=$('lint-result'); r.className='result'; r.innerHTML=''; }
+const SAMPLE_DOCKERFILE = `FROM python:3.11
+WORKDIR /app
+COPY requirements.txt .
+RUN apt-get update
+RUN apt-get install curl git
+RUN pip install -r requirements.txt
+ADD ./scripts /app/scripts
+ENV DB_PASSWORD=supersecret123
+COPY . .
+RUN chmod 777 ./entrypoint.sh
+EXPOSE 22
+EXPOSE 8080
+ENTRYPOINT ["./entrypoint.sh"]
+`;
+
+function detectFiletype(code, filename) {
+  const fname = (filename || '').toLowerCase().trim();
+  if (fname === 'dockerfile' || fname.startsWith('dockerfile.')) return 'dockerfile';
+  if (fname.endsWith('.py')) return 'python';
+  const lines = code.split('\n').map(l => l.trim()).filter(Boolean);
+  if (lines.length > 0) {
+    const first = lines[0].toUpperCase();
+    if (first.startsWith('FROM ') || first.startsWith('# SYNTAX=')) return 'dockerfile';
+    const dfInstructions = new Set(['FROM','RUN','CMD','LABEL','EXPOSE','ENV','ADD',
+      'COPY','ENTRYPOINT','VOLUME','USER','WORKDIR','ARG','HEALTHCHECK','SHELL']);
+    const hits = lines.slice(0,20).filter(l => dfInstructions.has(l.split(/\s+/)[0]?.toUpperCase())).length;
+    if (hits >= 3) return 'dockerfile';
+  }
+  return 'python';
+}
+
+function updateFileTypeBadge() {
+  const code=$('lint-code').value, filename=$('lint-filename').value;
+  const badge=$('filetype-badge'), ft=detectFiletype(code,filename);
+  if (ft==='dockerfile') { badge.textContent='🐳 Dockerfile'; badge.className='chip chip-b'; }
+  else                   { badge.textContent='🐍 Python';     badge.className='chip chip-g'; }
+}
+
+function loadSample(type) {
+  if (type==='dockerfile') { $('lint-code').value=SAMPLE_DOCKERFILE; $('lint-filename').value='Dockerfile'; }
+  else                     { $('lint-code').value=SAMPLE_PYTHON;     $('lint-filename').value='train.py';   }
+  updateFileTypeBadge();
+}
+
+function clearLint() {
+  $('lint-code').value=''; $('lint-filename').value='train.py';
+  const r=$('lint-result'); r.className='result'; r.innerHTML='';
+  updateFileTypeBadge();
+}
 
 async function runLint() {
-  const code = $('lint-code').value.trim();
-  const filename = $('lint-filename').value.trim() || 'script.py';
-  const btn = $('lint-btn'), result = $('lint-result');
-  if (!code) { result.className='result show'; result.innerHTML='<span class="r-warn">⚠ Paste some code first.</span>'; return; }
+  const code=$('lint-code').value.trim(), filename=$('lint-filename').value.trim()||'script.py';
+  const btn=$('lint-btn'), result=$('lint-result');
+  if(!code){ result.className='result show'; result.innerHTML='<span class="r-warn">⚠ Paste some code first.</span>'; return; }
   btn.disabled=true; btn.innerHTML='<span class="spin"></span> &nbsp;Analysing...';
   result.className='result show'; result.innerHTML='<span class="r-info">Running checks...</span>';
   try {
-    const res  = await fetch('/lint',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code,filename})});
-    const data = await res.json();
-    if (data.error) { result.innerHTML=`<span class="r-err">✖ ${esc(data.error)}</span>`; return; }
-    const {issues, summary} = data;
-    if (issues.length === 0) {
-      result.innerHTML=`<div class="r-row"><span class="r-ok">✔</span><span class="r-ok">No issues found in ${esc(filename)}</span></div><div class="r-row r-dim">All checks passed.</div>`;
-      return;
-    }
+    const res=await fetch('/lint',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code,filename})});
+    const data=await res.json();
+    if(data.error){ result.innerHTML=`<span class="r-err">✖ ${esc(data.error)}</span>`; return; }
+    const {issues,summary}=data;
+    if(!issues.length){ result.innerHTML=`<div class="r-row"><span class="r-ok">✔</span><span class="r-ok">No issues found in ${esc(filename)}</span></div><div class="r-row r-dim">All checks passed.</div>`; return; }
     let html=`<div class="r-row r-dim">${esc(filename)} — ${summary.total} issue(s): ${summary.errors} errors · ${summary.warnings} warnings</div><br>`;
-    issues.forEach(i => {
-      html+=`<div class="r-row" style="margin-bottom:.4rem;align-items:flex-start;">
-        <span class="sev sev-${esc(i.severity)}">${esc(i.severity)}</span>
-        <span><span class="r-dim">line ${i.line} —</span> ${esc(i.message)}</span>
-      </div>`;
-    });
-    result.innerHTML = html;
-  } catch(e) { result.innerHTML=`<span class="r-err">✖ ${esc(e.message)}</span>`; }
-  finally { btn.disabled=false; btn.innerHTML='🔍 Run Linting'; }
+    issues.forEach(i=>{html+=`<div class="r-row" style="margin-bottom:.4rem;align-items:flex-start;"><span class="sev sev-${esc(i.severity)}">${esc(i.severity)}</span><span><span class="r-dim">line ${i.line} —</span> ${esc(i.message)}</span></div>`;});
+    result.innerHTML=html;
+  } catch(e){ result.innerHTML=`<span class="r-err">✖ ${esc(e.message)}</span>`; }
+  finally{ btn.disabled=false; btn.innerHTML='🔍 Run Linting'; }
 }
 
-// ── SCANNING ──────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  SCANNING  — copied exactly from original
+// ═══════════════════════════════════════════════════════════
 async function runScan() {
   const image=$('scan-image').value.trim(), severity=$('scan-severity').value;
   const btn=$('scan-btn'), result=$('scan-result'), bar=$('scan-bar');
-  if (!image) { result.className='result show'; result.innerHTML='<span class="r-warn">⚠ Enter an image name.</span>'; return; }
+  if(!image){ result.className='result show'; result.innerHTML='<span class="r-warn">⚠ Enter an image name.</span>'; return; }
   btn.disabled=true; btn.innerHTML='<span class="spin"></span> &nbsp;Scanning...';
   result.className='result show'; bar.className='scan-bar';
   result.innerHTML=`<span class="r-info">Scanning ${esc(image)}...</span>`;
   try {
-    const res  = await fetch('/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image,severity})});
-    const data = await res.json();
-    if (data.error) { result.innerHTML=`<span class="r-err">✖ ${esc(data.error)}</span>`; return; }
-    const {vulnerabilities, summary, scanner} = data;
+    const res=await fetch('/scan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image,severity})});
+    const data=await res.json();
+    if(data.error){ result.innerHTML=`<span class="r-err">✖ ${esc(data.error)}</span>`; return; }
+    const {vulnerabilities,summary,scanner}=data;
     $('cnt-c').textContent=summary.CRITICAL||0; $('cnt-h').textContent=summary.HIGH||0;
     $('cnt-m').textContent=summary.MEDIUM||0;   $('cnt-l').textContent=summary.LOW||0;
     bar.className='scan-bar show';
-    if (vulnerabilities.length===0) {
-      result.innerHTML=`<div class="r-row"><span class="r-ok">✔</span><span class="r-ok">No vulnerabilities found in ${esc(image)}</span></div><div class="r-row r-dim">Scanner: ${esc(scanner)}</div>`;
-      return;
-    }
+    if(!vulnerabilities.length){ result.innerHTML=`<div class="r-row"><span class="r-ok">✔</span><span class="r-ok">No vulnerabilities found in ${esc(image)}</span></div><div class="r-row r-dim">Scanner: ${esc(scanner)}</div>`; return; }
     const order={CRITICAL:0,HIGH:1,MEDIUM:2,LOW:3};
     vulnerabilities.sort((a,b)=>(order[a.severity]||9)-(order[b.severity]||9));
     let html=`<div class="r-row r-dim">${vulnerabilities.length} vuln(s) · scanner: ${esc(scanner)}</div><br>`;
-    vulnerabilities.forEach(v => {
-      html+=`<div class="r-row" style="margin-bottom:.55rem;align-items:flex-start;">
-        <span class="sev sev-${v.severity.toLowerCase()}">${esc(v.severity)}</span>
-        <span style="margin-left:.4rem;">
-          <span style="color:#fff;font-weight:600;">${esc(v.id)}</span>
-          <span class="r-dim"> · ${esc(v.package)} ${esc(v.version)}</span><br>
-          <span style="color:var(--muted);font-size:.7rem;">${esc(v.description)}</span><br>
-          <span style="color:var(--muted);font-size:.68rem;">Fixed in: ${esc(v.fixed_in)}</span>
-        </span>
-      </div>`;
-    });
-    if ((summary.CRITICAL||0)>0) html+=`<br><div class="r-row"><span class="r-err">⚠</span><span class="r-err"> ${summary.CRITICAL} critical CVE(s) — consider a newer base image</span></div>`;
+    vulnerabilities.forEach(v=>{html+=`<div class="r-row" style="margin-bottom:.55rem;align-items:flex-start;"><span class="sev sev-${v.severity.toLowerCase()}">${esc(v.severity)}</span><span style="margin-left:.4rem;"><span style="color:#fff;font-weight:600;">${esc(v.id)}</span><span class="r-dim"> · ${esc(v.package)} ${esc(v.version)}</span><br><span style="color:var(--muted);font-size:.7rem;">${esc(v.description)}</span><br><span style="color:var(--muted);font-size:.68rem;">Fixed in: ${esc(v.fixed_in)}</span></span></div>`;});
+    if((summary.CRITICAL||0)>0) html+=`<br><div class="r-row"><span class="r-err">⚠</span><span class="r-err"> ${summary.CRITICAL} critical CVE(s) — consider a newer base image</span></div>`;
     result.innerHTML=html;
-  } catch(e) { result.innerHTML=`<span class="r-err">✖ ${esc(e.message)}</span>`; }
-  finally { btn.disabled=false; btn.innerHTML='🛡 Scan Image'; }
+  } catch(e){ result.innerHTML=`<span class="r-err">✖ ${esc(e.message)}</span>`; }
+  finally{ btn.disabled=false; btn.innerHTML='🛡 Scan Image'; }
 }
 
-// ── ONE-CLICK OPS ─────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+//  ONE-CLICK OPS  — copied exactly from original
+// ═══════════════════════════════════════════════════════════
+const STACKS = {
+  python: { copy:'COPY requirements.txt .', install:'RUN pip install --no-cache-dir -r requirements.txt', image:'python:3.11-slim', port:'8080' },
+  node:   { copy:'COPY package*.json .',    install:'RUN npm install --production',                        image:'node:20-slim',    port:'3000' },
+  php:    { copy:'COPY composer.json composer.lock .', install:'RUN composer install --no-dev --optimize-autoloader', image:'php:8.2-fpm', port:'9000' },
+  ruby:   { copy:'COPY Gemfile Gemfile.lock .', install:'RUN bundle install --without development test',   image:'ruby:3.2-slim',   port:'3000' },
+  go:     { copy:'COPY go.mod go.sum .',    install:'RUN go mod download',                                 image:'golang:1.21-alpine', port:'8080' },
+};
+
 function setSt(id,s){ $(id).className='st-c '+s; }
 function setCn(id)  { $(id).classList.add('done'); }
 function setSvc(n,d,msg,mc){ $('d-'+n).className='dot '+d; const l=$('l-'+n); l.textContent=msg; l.className=mc; }
@@ -544,70 +913,47 @@ async function runOPS() {
   [1,2,3,4,5].forEach(i=>$('cn-'+i).classList.remove('done'));
   ['docker','lint','scan','obs'].forEach(s=>setSvc(s,'dot-idle','idle','r-dim'));
 
-  const currentStack = $('stack-input').value || 'python';
-  const code     = $('ops-use-code').checked ? $('lint-code').value.trim() : '';
-  const filename = $('lint-filename').value.trim() || 'train.py';
-  const image    = $('scan-image').value.trim() || STACKS[currentStack].image;
+  const code    =$('ops-use-code').checked?$('lint-code').value.trim():'';
+  const filename=$('lint-filename').value.trim()||'train.py';
+  const image   =$('scan-image').value.trim()||'python:3.11-slim';
 
   setSt('sc-gen','active');
   setSvc('docker','dot-run','generating...','r-info');
-  termLog('t-inf',`▶ [1/6] Generating Docker artifacts for ${currentStack} stack...`);
+  termLog('t-inf','▶ [1/6] Generating Docker artifacts...');
 
   try {
-    const res  = await fetch('/ops',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        service_name:'ml-pipeline', port: STACKS[currentStack].port,
-        image_base:image, stack:currentStack,
-        code, filename,
-        stop_on_lint:$('ops-lint').checked,
-        stop_on_scan:$('ops-scan').checked,
-        severity:'CRITICAL,HIGH'
-      })
-    });
-    const data = await res.json();
-
+    const res=await fetch('/ops',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({service_name:'ml-pipeline',port:'8080',image_base:image,
+        stack:'python',code,filename,stop_on_lint:$('ops-lint').checked,
+        stop_on_scan:$('ops-scan').checked,severity:'CRITICAL,HIGH',
+        project_dir:($('ops-project-dir').value||'').trim()})});
+    const data=await res.json();
     const stepMap={generate:'gen',lint:'lint',scan:'scan',build:'build',deploy:'deploy',monitor:'monitor'};
     const connMap={lint:1,scan:2,build:3,deploy:4,monitor:5};
     const svcMap ={generate:'docker',lint:'lint',scan:'scan',monitor:'obs'};
-
-    for (const step of data.steps) {
+    for(const step of data.steps){
       await sleep(500);
-      const sc=stepMap[step.step], cn=connMap[step.step], svc=svcMap[step.step];
-
-      if (step.status==='error') {
+      const sc=stepMap[step.step],cn=connMap[step.step],svc=svcMap[step.step];
+      if(step.status==='error'){
         setSt('sc-'+sc,'error');
         if(svc) setSvc(svc,'dot-err',step.message.split('—')[0].trim(),'r-err');
         termLog('t-err',`  ✖ [${step.step.toUpperCase()}] ${step.message}`);
         if(step.issues) step.issues.slice(0,3).forEach(i=>termLog('t-err',`     line ${i.line}: ${i.message}`));
         if(step.vulnerabilities) step.vulnerabilities.filter(v=>v.severity==='CRITICAL').slice(0,3).forEach(v=>termLog('t-err',`     ${v.id} · ${v.package} ${v.version}`));
-        termLog('t-err','  ✖ Pipeline aborted.');
-        break;
+        termLog('t-err','  ✖ Pipeline aborted.'); break;
       }
-
-      if (step.status==='skipped') {
-        setSt('sc-'+sc,'skip');
-        if(cn) setCn('cn-'+cn);
-        if(svc) setSvc(svc,'dot-idle',step.message,'r-dim');
-        termLog('t-wrn',`  ⊘ [${step.step.toUpperCase()}] ${step.message}`);
-        continue;
+      if(step.status==='skipped'){
+        setSt('sc-'+sc,'skip'); if(cn)setCn('cn-'+cn);
+        if(svc)setSvc(svc,'dot-idle',step.message,'r-dim');
+        termLog('t-wrn',`  ⊘ [${step.step.toUpperCase()}] ${step.message}`); continue;
       }
-
-      setSt('sc-'+sc,'done');
-      if(cn) setCn('cn-'+cn);
-      if(svc) setSvc(svc, step.status==='warning'?'dot-warn':'dot-ok', step.status==='warning'?'warnings':'ok ✔', step.status==='warning'?'r-warn':'r-ok');
+      setSt('sc-'+sc,'done'); if(cn)setCn('cn-'+cn);
+      if(svc)setSvc(svc,step.status==='warning'?'dot-warn':'dot-ok',step.status==='warning'?'warnings':'ok ✔',step.status==='warning'?'r-warn':'r-ok');
       termLog(step.status==='warning'?'t-wrn':'t-ok',`  ✔ [${step.step.toUpperCase()}] ${step.message}`);
     }
-
-    if (data.status==='success') {
-      await sleep(300);
-      termLog('t-ok',''); termLog('t-ok','══════════════════════════════════');
-      termLog('t-ok','  ✔ Full pipeline completed successfully');
-      termLog('t-ok','══════════════════════════════════');
-    }
-  } catch(e) { termLog('t-err',`✖ ${e.message}`); }
-  finally { btn.disabled=false; btn.innerHTML='🚀 Run Full Pipeline'; }
+    if(data.status==='success'){await sleep(300);termLog('t-ok','');termLog('t-ok','══════════════════════════════════');termLog('t-ok','  ✔ Full pipeline completed successfully');termLog('t-ok','══════════════════════════════════');}
+  } catch(e){ termLog('t-err',`✖ ${e.message}`); }
+  finally{ btn.disabled=false; btn.innerHTML='🚀 Run Full Pipeline'; }
 }
 </script>
 </body>
